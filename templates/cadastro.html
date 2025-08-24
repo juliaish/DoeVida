@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro - DoeVida</title>
+</head>
+<body>
+    <h1>Cadastro de Doador</h1>
+    <nav>
+        <a href="/">Início</a>
+        <a href="/sobre">Sobre nós</a>
+        <a href="/requisitos">Requisitos para Doar</a>
+        <a href="/tipos-sanguineos">Tipo Sanguíneos</a>
+        <a href="/pos-doacao">Cuidados pós doaçao</a>
+    </nav><br><br>
+    <form action="/cadastro" method="POST">
+                <label>Email:</label>
+        <input type="text" name="email" required><br><br>
+
+        <label>Senha:</label>
+        <input type="password" name="senha" pattern="[A-Za-z0-9]+" required><br><br>
+
+        <label>Nome:</label>
+        <input type="text" name="nome" style="text-transform: capitalize;" pattern="[A-Za-zÀ-ÖØ-öø-ÿ ]+" required><br><br>
+
+        <label>Último sobrenome:</label>
+        <input type="text" name="sobrenome" style="text-transform: capitalize;" pattern="[A-Za-zÀ-ÖØ-öø-ÿ ]+" required><br><br>
+
+        <label>Tipo Sanguíneo:</label>
+        <select name="tipo" required>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+        </select><br><br>
+
+        <label>
+        Sexo biológico para doação (necessário para calcular o intervalo mínimo entre doações):
+        <span title="Essa informação é usada apenas para calcular o intervalo seguro entre doações. A perda mensal de ferro e hemoglobina devido à menstruação pode afetar a frequência de doação.">ℹ️</span>
+        </label>
+        <select name="sexo_biologico" required>
+            <option value="homem">Homem</option>
+            <option value="mulher">Mulher</option>
+            <option value="outro">Outro/Prefiro nao informar</option>
+        </select><br><br>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+
+
+</html>
