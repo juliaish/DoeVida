@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - DoeVida</title>
+</head>
+<body>
+
+    <!--lado esquerdo vermelhinho-->
+    <h1>Bem-Vindo de Volta!</h1>
+    <p>Não tem uma conta?</p>
+    <a href="{{ url_for('cadastro') }}">Cadastre-se</a></p>
+    <!--fim do lado esquerdo-->
+
+    <!--lado direito branco-->
+    <h1>Login</h1>
+
+    <form action="{{ url_for('login') }}" method="POST">
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="senha">Senha:</label><br>
+        <input type="password" id="senha" name="senha" required><br><br>
+
+
+        <button type="submit">Entrar</button>
+    </form>
+    <!--fim lado direito-->
+
+</body>
+</html>

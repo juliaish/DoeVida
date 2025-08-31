@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-
-<title>DoeVida</title>
+    <meta charset="UTF-8">
+    <title>DoeVida - Início</title>
 </head>
 <body>
-        <h1>DoeVida</h1>
-        <p>Conectando voce a quem precisa</p>
+    <h1>DoeVida</h1>
+    <p>Salvar vidas está ao seu alcance. Doe sangue, compartilhe esperança.</p>
 
     <nav>
-        <a href="/inicio">Início</a> |
-        <a href="/cadastro">Cadastro</a> |
-        <a href="/minha-area">Minha Área</a> |
-        <a href="/sobre">Sobre</a> |
-        <a href="/requisitos-para-doar">Requisitos para Doar</a> |
-        <a href="/tipos-sanguineos">Tipos Sanguíneos</a> |
-        <a href="/pos-doacao">Cuidados pós Doaçao</a> |
+        <a href="{{ url_for('inicio') }}">Início</a> |
+        <a href="{{ url_for('sobre') }}">Sobre</a> |
+        <a href="{{ url_for('tipos_sanguineos') }}">Tipos Sanguíneos</a> |
+        <a href="{{ url_for('requisitos_para_doar') }}">Requisitos para Doar</a> |
+        <a href="{{ url_for('pos_doacao') }}">Pós-Doação</a> |
+        <a href="{{ url_for('cadastro') }}">Cadastro</a> |
+        <a href="{{ url_for('login') }}">Login</a>
     </nav>
+
+    <footer>
+        <p>&copy; 2025 DoeVida - Projeto</p>
+    </footer>
 </body>
 </html>
