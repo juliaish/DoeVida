@@ -9,6 +9,9 @@ usuarios = {}
 def inicio():
     return render_template("index.html")
 
+import re
+from flask import flash  
+
 @app.route("/cadastro", methods=["GET", "POST"])
 def cadastro():
     if request.method == "POST":
@@ -21,7 +24,10 @@ def cadastro():
 
         nome_completo = f"{nome} {sobrenome}"
 
-        # salva usuário no "banco"
+        if not re.search(r"[A-Za-z]", senha) or not re.search(r"\d", senha) or not re.search(r"[^\w\s]", senha):
+            return "<h3>Erro: A senha deve conter pelo menos uma letra, um número e um símbolo.</h3><a href='/cadastro'>Voltar</a>"
+
+        # salva usuário
         usuarios[email] = {"senha": senha, "nome": nome_completo}
 
         if sexo_biologico == "homem":
@@ -46,6 +52,7 @@ def cadastro():
         resposta += '<br><a href="/">Voltar à página inicial</a>'
         return resposta
     return render_template("cadastro.html")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
