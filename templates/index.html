@@ -1,25 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <title>DoeVida - Início</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DoeVida</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <h1>DoeVida</h1>
-    <p>Salvar vidas está ao seu alcance. Doe sangue, compartilhe esperança.</p>
-
+  <header>
     <nav>
-        <a href="{{ url_for('inicio') }}">Início</a> |
-        <a href="{{ url_for('sobre') }}">Sobre</a> |
-        <a href="{{ url_for('tipos_sanguineos') }}">Tipos Sanguíneos</a> |
-        <a href="{{ url_for('requisitos_para_doar') }}">Requisitos para Doar</a> |
-        <a href="{{ url_for('pos_doacao') }}">Pós-Doação</a> |
-        <a href="{{ url_for('cadastro') }}">Cadastro</a> |
-        <a href="{{ url_for('login') }}">Login</a>
-    </nav>
+      <a class="logo" href="{{ url_for('inicio') }}">
+        <image src="./img/logo.png" width="200px">
+      </a>
+      <div class="mobile-menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+        <li><a href="#">Minha Área</a></li>
 
-    <footer>
-        <p>&copy; 2025 DoeVida - Projeto</p>
-    </footer>
+        <li>
+          <div class="dropdown">
+            <a class="dropbtn">Dúvidas</a>
+            <div class="dropdown-content">
+              <a href="{{ url_for('tipos_sanguineos') }}">Como Doar</a>
+              <a href="{{ url_for('tipos_sanguineos') }}">Tipos Sanguineos</a>
+              <a href="{{ url_for('pos_doacao') }}">Cuidados Pós Doação</a>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <button class="custom-btn btn-2 btn-orange" onclick="{{ url_for('login') }}">Login</button>
+        </li>
+        <li>
+          <button class="custom-btn btn-2 btn-blue" onclick="{{ url_for('cadastro') }}">Cadastro</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="centralizada">
+      <div class="txt-index">
+        <h1>Por que doar sangue?</h1>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim culpa. Excepturi corrupti numquam
+          sapiente tempore eos impedit, laudantium nemo sint aperiam et iusto eius odit recusandae minima perferendis
+          possimus!</p>
+      </div>
+      <div class="indeximg">
+        <img src="./img/indeximg1.png" alt="pessoa doando sangue" height="700px">
+      </div>
+    </div>
+  </main>
+  <script src="./js/script.js"></script>
 </body>
+
 </html>

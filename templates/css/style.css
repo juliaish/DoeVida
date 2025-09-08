@@ -1,0 +1,231 @@
+/*definiçoes globais*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ffe1da;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+a:hover {
+  color: #ffe1da;
+  text-decoration: underline;
+}
+
+.logo{
+  padding-top: 20px;
+}
+
+/*nav barra de navegaçao*/
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  background: #a2272c;
+  height: 8vh;
+}
+
+main {
+  background: url("bg.jpg") no-repeat center center;
+  background-size: cover;
+  height: 92vh;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-list li {
+  letter-spacing: 3px;
+  margin-left: 32px;
+}
+
+/*responsividade do header*/
+.mobile-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.mobile-menu div {
+  width: 32px;
+  height: 2px;
+  background: #fff;
+  margin: 8px;
+  transition: 0.3s;
+}
+
+@media (max-width: 999px) {
+  body {
+    overflow-x: hidden;
+  }
+  .nav-list {
+    position: absolute;
+    top: 8vh;
+    right: 0;
+    width: 50vw;
+    height: 92vh;
+    background: #c94f52;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in;
+  }
+  .nav-list li {
+    margin-left: 0;
+    opacity: 0;
+  }
+  .mobile-menu {
+    display: block;
+  }
+
+  .dropdown-content{
+    background-color: #c94f52;
+  }
+}
+
+.nav-list.active {
+  transform: translateX(0);
+}
+
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobile-menu.active .line1 {
+  transform: rotate(-45deg) translate(-8px, 8px);
+}
+
+.mobile-menu.active .line2 {
+  opacity: 0;
+}
+
+.mobile-menu.active .line3 {
+  transform: rotate(45deg) translate(-5px, -7px);
+}
+
+/*Botao duvidas dropd vown*/
+.dropbtn{
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #c94f52;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-content a {
+  float: none;
+  color: #fff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  border-radius: 10px;
+}
+
+.dropdown-content a:hover {
+  background-color: #ebe6e6;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Botao Logar e Cadastrar */
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color:#fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 10px 25px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  font-size: 15px;
+}
+
+.btn-2:before {
+  height: 0%;
+  width: 2px;
+}
+.btn-2:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255, 255, 255, 0.185),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+.btn-orange{
+  background:#f8b862;
+  border: none;
+}
+
+.btn-blue{
+  background:#3e4a9d;
+  border: none;
+}
+
+/*centralizar div principal*/
+.centralizada {
+  width: 85%;
+  height: 89%;
+  margin: 0 auto;
+  background-color: #fff8f6;
+  padding: 50px;
+  display: flex;
+  gap:20%;
+  justify-content: center;
+  align-items: center;
+}
+
+.txt-index {
+  width: 500px;
+  height: auto;
+  text-align: center;
+  color:#a2272c;
+  font-size: 30px;
+  font-family: "Edu QLD Hand", cursive;
+}
+
+.txt-index h1{
+  font-family: "Edu QLD Hand", cursive;
+  font-size: 75px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.indeximg {
+  width: 700px;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+}
