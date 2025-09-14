@@ -1,16 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+from werkzeug.security import generate_password_hash, check_password_hash
+import database
+import re
+import os
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24) #chave aleatoria
 
-# "banco de dados" temporário só para teste
-usuarios = {}
+database.init_db()
 
 @app.route("/")
 def inicio():
     return render_template("index.html")
-
-import re
-from flask import flash  
 
 @app.route("/cadastro", methods=["GET", "POST"])
 def cadastro():
@@ -24,35 +25,22 @@ def cadastro():
 
         nome_completo = f"{nome} {sobrenome}"
 
+        #verifica se a senha ta no padrao de letra, numero e simbolo
         if not re.search(r"[A-Za-z]", senha) or not re.search(r"\d", senha) or not re.search(r"[^\w\s]", senha):
-            return "<h3>Erro: A senha deve conter pelo menos uma letra, um número e um símbolo.</h3><a href='/cadastro'>Voltar</a>"
+            flash("A senha deve conter pelo menos uma letra, um número e um símbolo.", "error")
+            return redirect(url_for("cadastro"))
 
-        # salva usuário
-        usuarios[email] = {"senha": senha, "nome": nome_completo}
+        senha_hash = generate_password_hash(senha)
 
-        if sexo_biologico == "homem":
-            tempo_ate_proxima_doacao = 60
-        elif sexo_biologico == "mulher":
-            tempo_ate_proxima_doacao = 90
-        else:
-            tempo_ate_proxima_doacao = None
-
-        resposta = f"""
-        <h2>Cadastro realizado com sucesso!</h2><hr>
-        <p>Nome: {nome_completo}</p>
-        <p>Email: {email}</p>
-        <p>Tipo Sanguíneo: {tipo}</p>
-        <p>Sexo biológico informado: {sexo_biologico}</p>
-        """
-        if tempo_ate_proxima_doacao:
-            resposta += f"<p>Intervalo mínimo entre doações: {tempo_ate_proxima_doacao} dias</p>"
-        else:
-            resposta += f"<p>Para definir um intervalo seguro entre doações, consulte o hemocentro.</p>"
-
-        resposta += '<br><a href="/">Voltar à página inicial</a>'
-        return resposta
+        try:
+            database.inserir_usuario(nome, sobrenome, email, senha_hash, tipo, sexo_biologico)
+            flash("Cadastro realizado com sucesso!", "success")
+            return redirect(url_for("login"))
+        except Exception as e:
+            flash("Erro: e-mail já cadastrado.", "error")
+            return redirect(url_for("cadastro"))
+        
     return render_template("cadastro.html")
-
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -60,12 +48,15 @@ def login():
         email = request.form["email"]
         senha = request.form["senha"]
 
-        # verifica se email existe e senha confere
-        if email in usuarios and usuarios[email]["senha"] == senha:
-            nome = usuarios[email]["nome"]
-            return f"<h2>Bem-vindo de volta, {nome}!</h2><a href='/'>Voltar</a>"
+        usuario = database.buscar_usuario_por_email(email)
+
+        if usuario and check_password_hash(usuario["senha"], senha):
+            session["usuario_id"] = usuario["id"]
+            session["usuario_nome"] = usuario["nome"]
+            flash(f"Bem-vindo(a) de volta, {usuario['nome']}!", "success")
         else:
-            return "<h2>Usuário ou senha incorretos.</h2><a href='/login'>Tentar novamente</a>"
+            flash("Usuário ou senha incorretos.", "error")
+            return redirect(url_for("login"))
 
     return render_template("login.html")
 

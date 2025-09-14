@@ -21,6 +21,21 @@ def init_db():
     conn.commit()
     conn.close()
 
+def inserir_usuario(nome, sobrenome, email, senha_hash, tipo, sexo):
+    conn=get_db_connection()
+    conn.execute("""
+                 INSERT INTO usuarios (nome, sobrenome, email, senha, tipo, sexo_biologico)
+                 VALUES (?, ?, ?, ?, ?, ?)
+            """), (nome, sobrenome, email, senha_hash, tipo, sexo)
+    conn.commit()
+    conn.close()
+
+def buscar_usuario_por_email(email):
+    conn= get_db_connection()
+    usuario = conn.execute("SELECT * FROM usuarios WHERE email = ?", (email,)).fetchone()
+    conn.close()
+    return usuario
+
 if __name__=="__main__":
     init_db()
     print("Banco de dados inicializado!")
