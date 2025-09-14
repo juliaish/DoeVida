@@ -12,14 +12,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
   <!-- CSS -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-<!-- JS -->
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
-<!-- Imagens -->
-<img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
-<img src="{{ url_for('static', filename='img/indeximg1.png') }}" alt="Imagem 1">
+  
 
 </head>
 
@@ -27,7 +22,7 @@
   <header>
     <nav>
       <a class="logo" href="{{ url_for('inicio') }}">
-        <image src="./img/logo.png" width="200px">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
       </a>
       <div class="mobile-menu">
         <div class="line1"></div>
@@ -67,10 +62,13 @@
           possimus!</p>
       </div>
       <div class="indeximg">
-        <img src="./img/indeximg1.png" alt="pessoa doando sangue" height="700px">
+        <img src="{{ url_for('static', filename='img/indeximg1.png') }}" alt="Imagem 1" height="700px">
       </div>
     </div>
   </main>
+  <!-- JS -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  
   <script src="./js/script.js"></script>
 </body>
 
