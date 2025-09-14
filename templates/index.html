@@ -2,19 +2,18 @@
 <html lang="pt-br">
 
 <head>
-  
+
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DoeVida</title>
-  <link rel="stylesheet" href="./css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
   <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-  
+
 
 </head>
 
@@ -22,7 +21,7 @@
   <header>
     <nav>
       <a class="logo" href="{{ url_for('inicio') }}">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" width="200px">
       </a>
       <div class="mobile-menu">
         <div class="line1"></div>
@@ -45,10 +44,10 @@
         </li>
 
         <li>
-          <a href="{{ url_for('login') }}" class = "custom-btn btn-2 btn-orange">Login</a>
+          <button class="custom-btn btn-2 btn-orange" onclick="mudarPagina('login.html')">Login</button>
         </li>
         <li>
-          <a href="{{ url_for('cadastro') }}" class = "custom-btn btn-2 btn-blue">Cadastro</a>
+          <button class="custom-btn btn-2 btn-blue" onclick="mudarPagina('cadastro.html')">Cadastro</button>
         </li>
       </ul>
     </nav>
@@ -68,8 +67,7 @@
   </main>
   <!-- JS -->
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-  
-  <script src="./js/script.js"></script>
+
 </body>
 
 </html>
