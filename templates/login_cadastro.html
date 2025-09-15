@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>DoeVida</title>
+</head>
+
+<body>
+    <header>
+    <nav>
+      <a class="logo" href="{{ url_for('inicio') }}">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" width="200px">
+      </a>
+      <div class="mobile-menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+        <li><a href="#">Minha Área</a></li>
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+
+        <li>
+          <div class="dropdown">
+            <a class="dropbtn">Dúvidas</a>
+            <div class="dropdown-content">
+              <a href="{{ url_for('tipos_sanguineos') }}">Como Doar</a>
+              <a href="{{ url_for('tipos_sanguineos') }}">Tipos Sanguineos</a>
+              <a href="{{ url_for('pos_doacao') }}">Cuidados Pós Doação</a>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </nav>
+  </header>
+    <div class="login">
+        <div class="container" id="container">
+            <div class="form-container sign-up">
+                <form>
+                    <h1>Cadastro</h1>
+                    <span>digite seus dados para avançar</span>
+                    <input type="text" placeholder="Nome">
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Senha">
+                    <button class=" btn-2 btn-blue">avançar</button>
+                </form>
+            </div>
+            <div class="form-container sign-in">
+                <form>
+                    <h1>Login</h1>
+                    <span>digite seu e-mail e senha</span>
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Senha">
+                    <a href="#">Esqueceu sua senha?</a>
+                    <button class=" btn-2 btn-blue">Entrar</button>
+                </form>
+            </div>
+            <div class="toggle-container">
+                <div class="toggle">
+                    <div class="toggle-panel toggle-left">
+                        <h1>Olá, Seja Bem-Vindo!</h1>
+                        <p>já possui uma conta ?</p>
+                        <button class=" btn-2 btn-orange" id="login">Logar</button>
+                    </div>
+                    <div class="toggle-panel toggle-right">
+                        <h1>Bem-Vindo de Volta!</h1>
+                        <p>não possui uma conta ?</p>
+                        <button class=" btn-2 btn-orange" id="register">Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

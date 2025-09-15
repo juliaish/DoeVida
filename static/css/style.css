@@ -19,10 +19,6 @@ a:hover {
   text-decoration: underline;
 }
 
-.logo{
-  padding-top: 20px;
-}
-
 /*nav barra de navegaçao*/
 nav {
   display: flex;
@@ -229,3 +225,42 @@ main {
   display: flex;
   overflow: hidden;
 }
+
+/*centralizar div cuidados pós*/
+.centralizada {
+  width: 85%;
+  height: 89%;
+  margin: 0 auto;
+  background-color: #fff8f6;
+  padding: 50px;
+  display: flex;
+  gap:20%;
+  justify-content: center;
+  align-items: center;
+}
+
+.txt-cuidados {
+  width: 500px;
+  height: auto;
+  color:#a2272c;
+  font-size: 30px;
+  font-family: "Edu QLD Hand", cursive;
+}
+
+.txt-cuidados h1{
+  font-family: "Edu QLD Hand", cursive;
+  font-size: 75px;
+   height: auto;
+  display: flex;
+  overflow: hidden;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.cuidadosimg {
+  width: 700px;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+}
+

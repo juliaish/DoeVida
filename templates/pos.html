@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DoeVida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="{{ url_for('inicio') }}">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" width="200px">
+            </a>
+            <div class="mobile-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <ul class="nav-list">
+                <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+                <li><a href="#">Minha Área</a></li>
+
+                <li>
+                    <div class="dropdown">
+                        <a class="dropbtn">Dúvidas</a>
+                        <div class="dropdown-content">
+                            <a href="{{ url_for('tipos_sanguineos') }}">Como Doar</a>
+                            <a href="{{ url_for('tipos_sanguineos') }}">Tipos Sanguineos</a>
+                            <a href="{{ url_for('pos_doacao') }}">Cuidados Pós Doação</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <button class="custom-btn btn-2 btn-orange" onclick="mudarPagina('login.html')">Login</button>
+                </li>
+                <li>
+                    <button class="custom-btn btn-2 btn-blue" onclick="mudarPagina('cadastro.html')">Cadastro</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="centralizada">
+            <div class="cuidadosimg">
+
+                <img src="{{ url_for('static', filename='img/cuidadospos.png') }}" alt="Imagem 1" height="600px">
+            </div>
+            <div class="txt-cuidados">
+                <h1>Cuidados Pós-Doação</h1>
+                <ul>
+                    <li>doe sangue pufavo</li>
+                    <li>doe sangue pufavo</li>
+                    <li>doe sangue pufavo</li>
+                    <li>doe sangue pufavo</li>
+                    <li>doe sangue pufavo</li>
+                    <li>doe sangue pufavo</li>
+                    <li>doe sangue pufavo</li>
+                    <li>doe sangue pufavo</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

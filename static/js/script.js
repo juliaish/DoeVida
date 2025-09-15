@@ -43,16 +43,3 @@ const mobile = new Mobile(
   ".nav-list li",
 );
 mobile.init();
-
-
-/*Drop Down*/
-
-const showDropdown = (dropdownId) =>{
-  const dropdown = document.getElementById(dropdownId)
-
-  dropdown.addEventListener('click', ()=>{
-     /* Show dropdown */
-     dropdown.classList.toggle('show-dropdown')
-  })
-}
-showDropdown('dropdown')

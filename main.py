@@ -58,7 +58,7 @@ def login():
             flash("Usuário ou senha incorretos.", "error")
             return redirect(url_for("login"))
 
-    return render_template("login.html")
+    return render_template("login_cadastro.html")
 
 @app.route("/sobre")
 def sobre():
