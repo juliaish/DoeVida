@@ -36,6 +36,10 @@ class Mobile {
     return this;
   }
 }
+function mudarPagina(pagina) {
+  window.location.href = pagina;
+}
+
 
 const mobile = new Mobile(
   ".mobile-menu",

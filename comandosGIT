@@ -27,4 +27,9 @@ git branch        # 2 - confere em qual branch está (ex: main ou dev)
 git fetch         # 3 - atualiza as referências do remoto
 git pull          # 4 - puxa as mudanças do remoto para sua branch
 
- 
+AO SAIR:
+git status          # 1 - vê se há arquivos modificados ou não rastreados
+git add .           # 2 - adiciona todas as alterações à área de stage
+git commit -m "Mensagem clara do que foi feito"   # 3 - cria um commit com descrição
+git pull            # 4 - puxa mudanças do remoto para evitar conflitos
+git push            # 5 - envia seu commit para o repositório remoto
