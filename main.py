@@ -34,8 +34,12 @@ def cadastro():
 
         try:
             database.inserir_usuario(nome, sobrenome, email, senha_hash, tipo, sexo_biologico)
+            usuario = database.buscar_usuario_por_email(email)
+            session["usuario_id"] = usuario["id"]
+            session["usuario_nome"] = usuario["nome"]
             flash("Cadastro realizado com sucesso!", "success")
-            return redirect(url_for("login"))
+            return redirect(url_for("minha_area"))
+
         except Exception as e:
             flash("Erro: e-mail já cadastrado.", "error")
             return redirect(url_for("cadastro"))
@@ -54,6 +58,7 @@ def login():
             session["usuario_id"] = usuario["id"]
             session["usuario_nome"] = usuario["nome"]
             flash(f"Bem-vindo(a) de volta, {usuario['nome']}!", "success")
+            return redirect(url_for("minha_area"))
         else:
             flash("Usuário ou senha incorretos.", "error")
             return redirect(url_for("login"))
@@ -75,6 +80,13 @@ def requisitos_para_doar():
 @app.route("/pos-doacao")
 def pos_doacao():
     return render_template("pos.html")
+
+@app.route("/minha-area")
+def minha_area():
+    if "usuario_id" not in session:
+        flash("Você precisa estar logado para acessar essa página.", "error")
+        return redirect(url_for("login"))
+    return render_template("minha_area.html", nome=session["usuario_nome"])
 
 if __name__ == "__main__":
     app.run(debug=True)

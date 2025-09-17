@@ -22,11 +22,11 @@ def init_db():
     conn.close()
 
 def inserir_usuario(nome, sobrenome, email, senha_hash, tipo, sexo):
-    conn=get_db_connection()
+    conn = get_db_connection()
     conn.execute("""
-                 INSERT INTO usuarios (nome, sobrenome, email, senha, tipo, sexo_biologico)
-                 VALUES (?, ?, ?, ?, ?, ?)
-            """), (nome, sobrenome, email, senha_hash, tipo, sexo)
+        INSERT INTO usuarios (nome, sobrenome, email, senha, tipo, sexo_biologico)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (nome, sobrenome, email, senha_hash, tipo, sexo))
     conn.commit()
     conn.close()
 

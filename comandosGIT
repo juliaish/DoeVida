@@ -33,3 +33,6 @@ git add .           # 2 - adiciona todas as alterações à área de stage
 git commit -m "Mensagem clara do que foi feito"   # 3 - cria um commit com descrição
 git pull            # 4 - puxa mudanças do remoto para evitar conflitos
 git push            # 5 - envia seu commit para o repositório remoto
+
+#conta para teste: teste@gmail.com
+#senha: Teste123!
