@@ -43,8 +43,8 @@ def cadastro():
         except Exception as e:
             flash("Erro: e-mail já cadastrado.", "error")
             return redirect(url_for("cadastro"))
-        
-    return render_template("cadastro.html")
+         
+    return render_template("login_cadastro.html", add_class = 1)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
