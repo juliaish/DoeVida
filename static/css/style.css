@@ -65,6 +65,7 @@ main {
   body {
     overflow-x: hidden;
   }
+
   .nav-list {
     position: absolute;
     top: 8vh;
@@ -78,17 +79,33 @@ main {
     transform: translateX(100%);
     transition: transform 0.3s ease-in;
   }
+
   .nav-list li {
     margin-left: 0;
     opacity: 0;
   }
+
   .mobile-menu {
     display: block;
   }
 
-  .dropdown-content{
+  .dropdown-content {
     background-color: #c94f52;
   }
+
+  .centralizada {
+    flex-direction: column;
+    height: 87% !important;
+    overflow-x: hidden;
+    gap: 0 !important;
+
+  }
+
+  .indeximg img,
+  .cuidadosimg img {
+    display:none;
+  }
+
 }
 
 .nav-list.active {
@@ -223,7 +240,7 @@ main {
   width: 700px;
   height: auto;
   display: flex;
-  overflow: hidden;
+  justify-content: center;
 }
 
 /*centralizar div cuidados pós*/
@@ -261,6 +278,7 @@ main {
   width: 700px;
   height: auto;
   display: flex;
-  overflow: hidden;
+  overflow-x: hidden;
+  justify-content: center;
 }
 
