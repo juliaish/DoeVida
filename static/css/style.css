@@ -309,3 +309,11 @@ th {
   color: white;
 }
 
+.container-table{
+  width: auto;
+  height: auto;
+  text-align: center;
+  color:#a2272c;
+  font-size: 30px;
+  font-family: "Edu QLD Hand", cursive;
+}
