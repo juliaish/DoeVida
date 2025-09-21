@@ -83,11 +83,16 @@ def pos_doacao():
 
 @app.route("/minha-area")
 def minha_area():
-   return render_template("minha-area.html")
-    #if "usuario_id" not in session:
-     #   flash("Você precisa estar logado para acessar essa página.", "error")
-    #  return redirect(url_for("login"))
-    #return render_template("minha_area.html", nome=session["usuario_nome"])
+    if "usuario_id" not in session:
+        flash("Você precisa estar logado para acessar essa página.", "error")
+        return redirect(url_for("login"))
+    return render_template("minha-area.html", nome=session["usuario_nome"])
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("Você saiu da sua conta.", "success")
+    return redirect(url_for("inicio"))
 
 if __name__ == "__main__":
     app.run(debug=True)

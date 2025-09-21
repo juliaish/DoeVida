@@ -30,7 +30,10 @@
       </div>
       <ul class="nav-list">
         <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+        {% if session.get('usuario_id') %}
         <li><a href="{{ url_for('minha_area') }}">Minha Área</a></li>
+        {% endif %}
+
 
         <li>
           <div class="dropdown">
