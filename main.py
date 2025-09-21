@@ -5,9 +5,8 @@ import database
 import re
 import os
 
-
 app = Flask(__name__)
-app.secret_key = os.environ.get("d03v1d4", "dev_key_for_local")
+app.config.from_pyfile('config.py')
 
 database.init_db()
 
@@ -110,6 +109,7 @@ def logout():
     return redirect(url_for("inicio"))
 
 @app.route("/doe-aqui")
+@requerimento_login
 def doe_aqui():
     return render_template("doe-aqui.html")
 
