@@ -1,12 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Requisitos para Doar</title>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DoeVida</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+
 </head>
+
 <body>
-    <h1>Requisitos para Doar</h1>
-    <p>*lista de requisitos*</p>
-</body> 
+  <header>
+    <nav>
+      <a class="logo" href="{{ url_for('inicio') }}">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" width="200px">
+      </a>
+      <div class="mobile-menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+        {% if session.get('usuario_id') %}
+        <li><a href="{{ url_for('minha_area') }}">Minha Área</a></li>
+        {% endif %}
+
+
+        <li>
+          <div class="dropdown">
+            <a class="dropbtn">Dúvidas</a>
+            <div class="dropdown-content">
+              <a href="{{ url_for('tipos_sanguineos') }}">Como Doar</a>
+              <a href="{{ url_for('tipos_sanguineos') }}">Tipos Sanguineos</a>
+              <a href="{{ url_for('pos_doacao') }}">Cuidados Pós Doação</a>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <a class="custom-btn btn-2 btn-orange" href="{{ url_for('login') }}">Login</a>
+        </li>
+        <li>
+          <a class="custom-btn btn-2 btn-blue" href="{{ url_for('cadastro') }}">Cadastro</a>
+
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="centralizada">
+      <div class="txt-index">
+        <h1>Requisitos para doar</h1>
+        <p>mantendo no padrao, basta editar</p>
+      </div>
+    </div>
+  </main>
+
+</body>
 
 </html>
