@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
+import sqlite3
 import database
 import re
-import os
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -11,7 +11,7 @@ app.config.from_pyfile('config.py')
 database.init_db()
 
 #decorador python
-def requerimento_login(f):
+def login_required(f):
     @wraps(f)
     def decor_funcao(*args, **kwargs):
         if 'usuario_id' not in session:
@@ -34,6 +34,9 @@ def cadastro():
         tipo = request.form["tipo"]
         sexo_biologico = request.form["sexo_biologico"]
 
+        nome = re.sub(r"[^A-Za-záàâãéèêíìîóòôõúùûüç\s-]", "", nome).strip()
+        sobrenome = re.sub(r"[^A-Za-záàâãéèêíìîóòôõúùûüç\s-]", "", sobrenome).strip()
+
         #verifica se o email ta no padrao de email
         if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
             flash("Por favor, insira um endereço de e-mail válido.", "error")
@@ -44,7 +47,7 @@ def cadastro():
             not re.search(r"[A-Z]", senha) or 
             not re.search(r"\d", senha) or
             not re.search(r"[^\w\s]", senha)):
-            flash("A senha deve conter pelo menos uma lletra maiúscula, uma minúscula, um número e um símbolo.", "error")
+            flash("A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um símbolo.", "error")
             return redirect(url_for("cadastro"))
 
         senha_hash = generate_password_hash(senha)
@@ -57,10 +60,15 @@ def cadastro():
             flash("Cadastro realizado com sucesso!", "success")
             return redirect(url_for("minha_area"))
 
-        except Exception as e:
+        except sqlite3.IntegrityError:
             flash("Erro: e-mail já cadastrado.", "error")
             return redirect(url_for("cadastro"))
-         
+        
+        except Exception as e:
+            print(f"Ocorreu um erro inesperado: {e}")
+            flash("Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.", "error")
+            return redirect(url_for("cadastro"))
+
     return render_template("login_cadastro.html", add_class = 1)
 
 @app.route("/login", methods=["GET", "POST"])
@@ -99,7 +107,7 @@ def pos_doacao():
     return render_template("pos.html")
 
 @app.route("/minha-area")
-@requerimento_login
+@login_required
 def minha_area():
     return render_template("minha-area.html", nome=session["usuario_nome"])
 
@@ -110,7 +118,7 @@ def logout():
     return redirect(url_for("inicio"))
 
 @app.route("/doe-aqui")
-@requerimento_login
+@login_required
 def doe_aqui():
     return render_template("doe-aqui.html")
 
