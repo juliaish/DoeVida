@@ -34,16 +34,17 @@ def cadastro():
         tipo = request.form["tipo"]
         sexo_biologico = request.form["sexo_biologico"]
 
-        nome_completo = f"{nome} {sobrenome}"
-
         #verifica se o email ta no padrao de email
         if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
             flash("Por favor, insira um endereço de e-mail válido.", "error")
             return redirect(url_for("cadastro"))
         
         #verifica se a senha ta no padrao de letra, numero e simbolo
-        if not re.search(r"[A-Za-z]", senha) or not re.search(r"\d", senha) or not re.search(r"[^\w\s]", senha):
-            flash("A senha deve conter pelo menos uma letra, um número e um símbolo.", "error")
+        if (not re.search(r"[a-z]", senha) or 
+            not re.search(r"[A-Z]", senha) or 
+            not re.search(r"\d", senha) or
+            not re.search(r"[^\w\s]", senha)):
+            flash("A senha deve conter pelo menos uma lletra maiúscula, uma minúscula, um número e um símbolo.", "error")
             return redirect(url_for("cadastro"))
 
         senha_hash = generate_password_hash(senha)
