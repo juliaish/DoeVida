@@ -5,7 +5,7 @@ import re
 import os
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24) #chave aleatoria
+app.secret_key = os.environ.get("d03v1d4", "dev_key_for_local")
 
 database.init_db()
 
@@ -25,6 +25,11 @@ def cadastro():
 
         nome_completo = f"{nome} {sobrenome}"
 
+        #verifica se o email ta no padrao de email
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            flash("Por favor, insira um endereço de e-mail válido.", "error")
+            return redirect(url_for("cadastro"))
+        
         #verifica se a senha ta no padrao de letra, numero e simbolo
         if not re.search(r"[A-Za-z]", senha) or not re.search(r"\d", senha) or not re.search(r"[^\w\s]", senha):
             flash("A senha deve conter pelo menos uma letra, um número e um símbolo.", "error")
@@ -93,6 +98,10 @@ def logout():
     session.clear()
     flash("Você saiu da sua conta.", "success")
     return redirect(url_for("inicio"))
+
+@app.route("/doe-aqui")
+def doe_aqui():
+    return render_template("doe-aqui.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
