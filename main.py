@@ -1,12 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
+from config import DevelopmentConfig, ProductionConfig, TestingConfig
 from functools import wraps
 import sqlite3
 import database
 import re
+import os
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
+
+env = os.environ.get("FLASK_ENV", "development")
+
+if env == "production":
+    app.config.from_object(ProductionConfig)
+elif env == "testing":
+    app.config.from_object(TestingConfig)
+else:
+    app.config.from_object(DevelopmentConfig)
 
 database.init_db()
 
@@ -20,6 +31,7 @@ def login_required(f):
         return f(*args, **kwargs)
     return decor_funcao
 
+#rotas para paginas
 @app.route("/")
 def inicio():
     return render_template("index.html")
@@ -122,5 +134,14 @@ def logout():
 def doe_aqui():
     return render_template("doe-aqui.html")
 
+@app.route("/maps")
+@login_required
+def maps():
+    data = request.get_json()
+    latitude = data.get("latitude")
+    longitude = data.get("longitude")
+    #API...
+    return {"status": "ok", "latitude": latitude, "longitude": longitude}
+#inicializacao
 if __name__ == "__main__":
     app.run(debug=True)

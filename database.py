@@ -1,4 +1,5 @@
 import sqlite3
+import json
 
 def get_db_connection():
     """conexao com o bd"""
@@ -20,6 +21,17 @@ def init_db():
             sexo_biologico TEXT
         )
         """)
+        #questionario
+        conn.execute("""
+        CREATE TABLE IF NOT EXISTS questionarios (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            usuario_id INTEGER NOT NULL,
+            respostas TEXT NOT NULL,
+            resultado TEXT,
+            data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+        )
+        """)
 
 def inserir_usuario(nome, sobrenome, email, senha_hash, tipo, sexo):
     """adiciona um novo usuario"""
@@ -36,6 +48,14 @@ def buscar_usuario_por_email(email):
     with get_db_connection() as conn:
         usuario = conn.execute("SELECT * FROM usuarios WHERE email = ?", (email,)).fetchone()
     return usuario
+
+def salvar_questionario(usuario_id, respostas, resultado):
+    with get_db_connection() as conn:
+        conn.execute("""
+             INSERT INTO questionarios (usuario_id, respostas, resultado)
+             VALUES (?, ?, ?)
+        """, (usuario_id, json.dumps(respostas), resultado))
+        conn.commit()
 
 if __name__=="__main__":
     init_db()

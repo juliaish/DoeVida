@@ -4,3 +4,4 @@ er.name
 usuarios.db
 __pycache--/
 *.__pycache
+a.env
