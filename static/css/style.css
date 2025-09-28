@@ -319,3 +319,86 @@ th {
   font-size: 30px;
   font-family: "Edu QLD Hand", cursive;
 }
+
+/*centralizar questionario*/
+.questionario {
+  width: 85%;
+  height: auto;
+  margin: 0 auto;
+  background-color: #fff8f6;
+  gap:20%;
+  padding: 30px 0 0 80px;
+  color:#c94f52;
+  text-align: left;
+  font-size: 20px;
+  font-family: "Edu QLD Hand", cursive;
+}
+
+.form-questionario p{
+  margin-top: 30px;
+  font-weight: bold;
+  color:#a2272c;
+}
+
+.form-questionario ul{
+  padding-left: 30px;
+}
+
+
+.caixa-select {
+  font-family: "Edu QLD Hand", cursive;             
+  color: #a2272c;                      
+  background-color: #ffffff;   
+  font-size: 20px;     
+  
+  border: 2px solid #a2272c;         
+  border-radius: 8px;              
+  padding: 6px 10px;                
+  cursor: pointer;    
+}
+
+.caixa-select:focus {
+  border-color: #ffe1da;            
+  outline: none;                    
+}
+
+/*estilizar questionario date*/
+.input-date {
+  font-family: "Edu QLD Hand", cursive;   
+  font-size: 20px;                  
+  color: #a2272c;                    
+
+  background-color: #ffffff;        
+  border: 2px solid #a2272c;           
+  border-radius: 8px;              
+  padding: 5px;         
+  cursor: pointer;                  
+}
+
+
+.input-date:focus {
+  border-color: #ffe1da;            
+  outline: none; 
+}
+
+.input-date::-webkit-calendar-picker-indicator {
+  background: none;
+  color: transparent;
+  cursor: pointer;
+}
+
+.input-date::-moz-focus-inner {
+  border: 0;
+}
+
+
+.button-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.btn-quest{
+  width: 20% !important;
+}

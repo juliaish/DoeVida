@@ -42,34 +42,13 @@
   <div class="login">
     <div class="container {%if add_class %} active {% endif %}" id="container">
       <div class="form-container sign-up">
-        <form action="{{ url_for('cadastro') }}" method="POST">
+        <form action="{{ url_for('questionario') }}" method="GET">
           <h1>Cadastro</h1>
           <span>digite seus dados para avançar</span>
           <input type="text" name="nome" placeholder="Nome" required>
           <input type="text" name="sobrenome" placeholder="Sobrenome" required>
           <input type="email" name="email" placeholder="Email" required>
           <input type="password" name="senha" placeholder="Senha" required>
-          <!--MUDAR NO CSS AS CAIXAS DE SELECT TIPO E SEXO-->
-          <label for="tipo" style="display:none;">Tipo sanguíneo</label>
-          <select name="tipo" id="tipo" required>
-            <option value="" disabled selected>Selecione o tipo sanguíneo</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-          </select>
-
-          <label for="sexo_biologico" style="display:none;">Sexo biológico</label>
-          <select name="sexo_biologico" id="sexo_biologico" required>
-            <option value="" disabled selected>Selecione o sexo biológico</option>
-            <option value="Feminino">Feminino</option>
-            <option value="Masculino">Masculino</option>
-            <!--adicionar intersexo?-->
-            <option value="Prefiro não informar">Prefiro não informar</option>
           </select>
           <button class=" btn-2 btn-blue">Avançar</button>
         </form>

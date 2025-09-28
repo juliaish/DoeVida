@@ -36,6 +36,17 @@ def login_required(f):
 def inicio():
     return render_template("index.html")
 
+@app.route("/questionario", methods=["GET", "POST"])
+def questionario():
+    if request.method == "POST":
+        email = request.form["email"]
+        nome = request.form["nome"]
+        sobrenome = request.form["sobrenome"]
+        senha =  request.form["senha"]
+
+        
+        return render_template(("questionario.html"),nome = nome,email = email, senha = senha, sobrenome = sobrenome)
+
 @app.route("/cadastro", methods=["GET", "POST"])
 def cadastro():
     if request.method == "POST":

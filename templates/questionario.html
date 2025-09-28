@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>DoeVida</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="{{ url_for('inicio') }}">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" width="200px">
+            </a>
+            <div class="mobile-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <ul class="nav-list">
+                <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+
+                <li>
+                    <div class="dropdown">
+                        <a class="dropbtn">Dúvidas</a>
+                        <div class="dropdown-content">
+                            <a href="{{ url_for('requisitos_para_doar') }}">Requisitos para Doar</a>
+                            <a href="{{ url_for('tipos_sanguineos') }}">Tipos Sanguineos</a>
+                            <a href="{{ url_for('pos_doacao') }}">Cuidados Pós Doação</a>
+                        </div>
+                    </div>
+                </li>
+        </nav>
+        <main>
+            <div class="questionario">
+                <form action="{{url_for('cadastro')}}" method="POST" class="form-questionario">
+                    <input type="hidden" name="nome" value="{{ nome }}">
+                    <input type="hidden" name="sobrenome" value="{{ sobrenome }}">
+                    <input type="hidden" name="email" value="{{ email }}">
+                    <input type="hidden" name="senha" value="{{ senha }}">
+                    <!-- data nascimento -->
+
+                    <p>Digite sua data de Nascimento:</p>
+                    <input type="date" name="dtNascimento" class="input-date">
+                     
+                    <!-- genero -->
+                    <p>Qual seu gênero ?</p>
+                    <select name="genero" id="genero" class="caixa-select" required>
+                        <option value="" disabled selected>Selecione:</option>
+                        <option value="genero">Homem</option>
+                        <option value="genero">Mulher</option>
+                        <option value="genero">Não-binário</option>
+                        <option value="genero">Outro</option>
+                    </select>
+
+                    <!-- tipo sanguineo -->
+                    <p>Qual seu tipo sanguineo ?</p>
+                    <select name="tipo" id="tipo" class="caixa-select" required>
+                        <option value="" disabled selected>Selecione:</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+
+                    <!-- peso -->
+                    <p >Quanto você pesa ?</p>
+                    <input type="radio" name="peso" id=""> mais que 50 kg<br>
+                    <input type="radio" name="peso" id=""> menos que 50 kg<br>
+
+                    <!-- doenças -->
+                    <p>Você ja teve alguma dessas doenças ?</p>
+                    <ul>
+                        <li>HIV/AIDS</li>
+                        <li>Hepatite B ou C</li>
+                        <li>Doença de Chagas</li>
+                        <li>Malária</li>
+                        <li>HTLV I/II</li>
+                    </ul>
+                    <input type="radio" name="doencasgerais" id=""> Sim <br>
+                    <input type="radio" name="doencasgerais" id=""> Não <br>
+
+                    <!-- problemas cardiacos -->
+                    <p >Você possui alguma doença cardíaca grave (ex.: insuficiência cardíaca, arritmia
+                        grave, cardiopatia congênita não tratada) ?</p>
+                    <input type="radio" name="problemacardiaco" id=""> sim<br>
+                    <input type="radio" name="problemacardiaco" id=""> não<br>
+
+                    <!-- diabetes -->
+                    <p >Você possui diabetes ?</p>
+                    <input type="radio" name="diabetes" id=""> Não<br>
+                    <input type="radio" name="diabetes" id=""> Sim, controlada com dieta ou comprimidos<br>
+                    <input type="radio" name="diabetes" id=""> Sim, faço uso de insulina<br>
+
+                    <!-- cancer de sangue -->
+                    <p >Você já teve câncer no sangue (ex.: leucemia, linfoma) ?</p>
+                    <input type="radio" name="cancersangue" id=""> Sim<br>
+                    <input type="radio" name="cancersangue" id=""> Não<br>
+
+                    <!-- doenças renais -->
+                    <p >Você possui doença renal crônica (insuficiência renal) ?</p>
+                    <input type="radio" name="doencarenal" id=""> Sim<br>
+                    <input type="radio" name="doencarenal" id=""> Não<br>
+
+                    <!-- problemas de coagulação -->
+                    <p >Você possui problemas graves de coagulação do sangue (ex.: hemofilia)
+                        ?</p>
+                    <input type="radio" name="problemacoagulacao" id=""> Sim<br>
+                    <input type="radio" name="problemacoagulacao" id=""> Não<br>
+
+                    <!-- problemas de epilepsia -->
+                    <p >Você tem epilepsia ?</p>
+                    <input type="radio" name="problemaepilepsia" id=""> Não<br>
+                    <input type="radio" name="problemaepilepsia" id=""> Sim, mas está controlada (sem crises
+                    recentes)<br>
+                    <input type="radio" name="problemaepilepsia" id=""> Sim, tenho crises recorrentes<br>
+
+                    <!-- doenças em orgãos -->
+                    <p >Você possuí alguma doença autoimune que afeta algum órgão ?</p>
+                    <input type="radio" name="doencaorgaos" id=""> Sim<br>
+                    <input type="radio" name="doencaorgaos" id=""> Não<br><br>
+
+                    <div class="button-div">
+                        <input type="submit" value="Cadastrar" class="custom-btn btn-2 btn-blue btn-quest">
+                    </div>
+                </form>
+            </div>
+        </main>
+        <!-- JS -->
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>
