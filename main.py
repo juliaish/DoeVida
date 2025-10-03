@@ -36,17 +36,6 @@ def login_required(f):
 def inicio():
     return render_template("index.html")
 
-@app.route("/questionario", methods=["GET", "POST"])
-def questionario():
-    if request.method == "POST":
-        email = request.form["email"]
-        nome = request.form["nome"]
-        sobrenome = request.form["sobrenome"]
-        senha =  request.form["senha"]
-
-        
-        return render_template(("questionario.html"),nome = nome,email = email, senha = senha, sobrenome = sobrenome)
-
 @app.route("/cadastro", methods=["GET", "POST"])
 def cadastro():
     if request.method == "POST":
@@ -145,14 +134,31 @@ def logout():
 def doe_aqui():
     return render_template("doe-aqui.html")
 
-@app.route("/maps")
+@app.route("/maps", methods=["POST"])
 @login_required
 def maps():
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     latitude = data.get("latitude")
     longitude = data.get("longitude")
     #API...
     return {"status": "ok", "latitude": latitude, "longitude": longitude}
+
+@app.route("/questionario", methods=["GET", "POST"])
+@login_required
+def questionario():
+    if request.method == "POST":
+        respostas = request.form.to_dict()
+        #API GEMINI VAI AQUI
+        resultado = "Apto a doar"
+        try:
+            database.salvar_questionario(session["usuario_id"], respostas, resultado)
+            flash("Questionário salvo com sucesso!", "success")
+        except Exception as e:
+            print(f"Erro ao salvar questionário: {e}")
+            flash("Erro ao salvar questionário. Tente novamente.", "error")
+        return redirect(url_for("minha_area"))
+    return render_template("questionario.html")
+
 #inicializacao
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
