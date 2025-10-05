@@ -57,13 +57,82 @@
     </nav>
   </header>
   <main>
-    <div class="centralizada">
-      <div class="txt-index">
-        <h1>Minha Area/Perfil</h1>
-        <p>mantendo no padrao, basta editar</p>
+    <div class="container-principal">
+      <h1 class="txt-inicio">Olá, seja Bem-Vindo!</h1>
+      <div class="container-m-area borda-arrendondada">
+        <h1>Dados Cadastrais:</h1> <br>
+        <form id="formPerfil" action="">
+          <div class="dados-princ">
+            <div class="dados">
+              <label for="nome">Nome:</label><br>
+              <input class="caixa-text" type="text" id="nome" name="nome" value="Wanessa Estrela" disabled><br>
+              <label for="email">Email:</label><br>
+              <input class="caixa-text" type="email" id="email" name="email" value="wany@gmail.com" disabled><br>
+              <label for="senha">Senha:</label><br>
+              <input class="caixa-text" type="password" id="senha" name="senha" value="aAbBcC" disabled><br>
+              <label for="peso">Peso:</label><br>
+              <input class="caixa-text" type="number" id="peso" name="peso" value="50kg" disabled> Kg<br>
+            </div>
+
+            <div class="dados">
+              <label for="">Tipo Sanguineo:</label><br>
+              <select class="caixa-select caixa-select:focus" id="" name="tipo" disabled>
+                <option value="">Selecione...</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select><br>
+
+              <label for="">Data de Nascimento: </label><br>
+              <input class="input-date" type="date" disabled><br>
+
+              <label for="">Gênero: </label><br>
+              <select class="caixa-select caixa-select:focus" id="genero" name="genero" disabled>
+                <option value="genero">Homem</option>
+                <option value="genero">Mulher</option>
+                <option value="genero">Não-binário</option>
+                <option value="genero">Outro</option>
+              </select> 
+            </div>
+          </div>
+          <input class="btn-alterar btn-orange custom-btn btn-2:before btn-2:hover" type="submit" id="btnSalvar" value="Salvar" style="display: none;">
+        </form>
+
+        <input class="btn-alterar btn-blue custom-btn btn-2:before btn-2:hover" type="button" id="btnEditar" value="Alterar dados">
+      </div>
+      <div class="container-m-area borda-arrendondada">
+        <h1>Onde Doar:</h1>
+        <p>aqui vai ser o mapa</p>
       </div>
     </div>
   </main>
+
+  <script>
+    const btnEditar = document.getElementById("btnEditar");
+    const btnSalvar = document.getElementById("btnSalvar");
+
+    // Pega todos os inputs e selects
+    const campos = document.querySelectorAll("#formPerfil input, #formPerfil select");
+
+    btnEditar.addEventListener("click", () => {
+      campos.forEach(campo => campo.disabled = false);
+      btnEditar.style.display = "none";
+      btnSalvar.style.display = "block";
+    });
+
+    btnSalvar.addEventListener("click", (e) => {
+      e.preventDefault();
+      campos.forEach(campo => campo.disabled = true);
+      btnEditar.style.display = "block";
+      btnSalvar.style.display = "none";
+      alert("Dados salvos com sucesso!");
+    });
+  </script>
 
 </body>
 

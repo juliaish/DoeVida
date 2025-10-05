@@ -344,7 +344,7 @@ th {
   padding-left: 30px;
 }
 
-
+/*estilizar select*/
 .caixa-select {
   font-family: "Edu QLD Hand", cursive;             
   color: #a2272c;                      
@@ -401,4 +401,75 @@ th {
 
 .btn-quest{
   width: 20% !important;
+}
+
+/* minha área */
+
+.container-principal {
+  width: 85%;
+  height: 89%;
+  margin: 0 auto;
+  background-color: #fff8f6;
+  padding: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.txt-inicio {
+  color:#a2272c;
+  font-size: 40px;
+  font-family: "Edu QLD Hand", cursive;
+  margin-bottom: 50px;
+}
+
+.container-m-area {
+  width: auto;
+  height: auto;
+  color:#a2272c;
+  font-size: 20px;
+  font-family: "Edu QLD Hand", cursive;
+  padding: 30px;
+  margin-bottom: 30px;
+  gap: 30px;
+}
+
+.container-m-area h1 {
+  font-size: 30px;
+}
+
+.dados-princ {
+  display: flex;
+  gap: 70px;
+}
+
+.dados input, select{
+  margin-bottom: 20px;
+}
+
+.borda-arrendondada {
+  border: 2px solid #a2272c;
+  border-radius: 20px;
+}
+
+.caixa-text {
+  font-family: "Edu QLD Hand", cursive;             
+  color: #a2272c;                      
+  background-color: #ffffff;   
+  font-size: 20px;     
+  
+  border: 2px solid #a2272c;         
+  border-radius: 8px;              
+  padding: 6px 10px;                
+  cursor: pointer;    
+}
+
+.caixa-text:disabled,.caixa-select:disabled,.input-date:disabled {
+  background-color: #EBE6E6; 
+  color: #a0a0a0;
+  border: 2px solid #ccc;
+  cursor: not-allowed;
+}
+
+.btn-alterar {
+  width: 150px;
 }

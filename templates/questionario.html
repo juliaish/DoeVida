@@ -49,17 +49,17 @@
                     <!-- genero -->
                     <p>Qual seu gênero ?</p>
                     <select name="genero" id="genero" class="caixa-select" required>
-                        <option value="" disabled selected>Selecione:</option>
-                        <option value="genero">Homem</option>
-                        <option value="genero">Mulher</option>
-                        <option value="genero">Não-binário</option>
-                        <option value="genero">Outro</option>
+                        <option value="" disabled selected>Selecione...</option>
+                        <option value="Homem">Homem</option>
+                        <option value="Mulher">Mulher</option>
+                        <option value="Nao-binario">Não-binário</option>
+                        <option value="Outro">Outro</option>
                     </select>
 
                     <!-- tipo sanguineo -->
                     <p>Qual seu tipo sanguineo ?</p>
                     <select name="tipo" id="tipo" class="caixa-select" required>
-                        <option value="" disabled selected>Selecione:</option>
+                        <option value="" disabled selected>Selecione...</option>
                         <option value="A+">A+</option>
                         <option value="A-">A-</option>
                         <option value="B+">B+</option>
@@ -72,8 +72,7 @@
 
                     <!-- peso -->
                     <p >Quanto você pesa ?</p>
-                    <input type="radio" name="peso" id=""> mais que 50 kg<br>
-                    <input type="radio" name="peso" id=""> menos que 50 kg<br>
+                   <input class="caixa-text" type="number" id="peso" name="peso" value="50kg" > Kg<br>
 
                     <!-- doenças -->
                     <p>Você ja teve alguma dessas doenças ?</p>
