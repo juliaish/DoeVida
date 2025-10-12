@@ -44,7 +44,7 @@
   <div class="login">
     <div class="container {%if add_class %} active {% endif %}" id="container">
       <div class="form-container sign-up">
-        <form action="{{ url_for('questionario') }}" method="GET">
+        <form action="{{ url_for('cadastro_questionario') }}" method="POST">
           <h1>Cadastro</h1>
           <span>digite seus dados para avançar</span>
           <input type="text" name="nome" placeholder="Nome" required>

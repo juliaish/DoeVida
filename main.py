@@ -119,9 +119,10 @@ def pos_doacao():
     return render_template("pos.html")
 
 @app.route("/minha-area")
-@login_required
+#@login_required
 def minha_area():
-    return render_template("minha-area.html", nome=session["usuario_nome"])
+    return render_template("minha-area.html",# nome=session["usuario_nome"]
+                           )
 
 @app.route("/logout")
 def logout():
@@ -162,6 +163,18 @@ def questionario():
             flash("Erro ao salvar questionário. Tente novamente.", "error")
         return redirect(url_for("minha_area"))
     return render_template("questionario.html")
+
+
+@app.route("/cadastro-questionario", methods=["GET", "POST"])
+def cadastro_questionario():
+   if request.method == "POST":
+        email = request.form["email"]
+        nome = request.form["nome"]
+        sobrenome = request.form["sobrenome"]
+        senha =  request.form["senha"]
+
+        
+        return render_template(("questionario.html"),nome = nome,email = email, senha = senha, sobrenome = sobrenome)
 
 #inicializacao
 if __name__ == "__main__":
