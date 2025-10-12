@@ -134,6 +134,10 @@ def logout():
 def doe_aqui():
     return render_template("doe-aqui.html")
 
+@app.route("/endereços")
+def endereços():
+    return render_template("endereços.html")
+
 @app.route("/maps", methods=["POST"])
 @login_required
 def maps():

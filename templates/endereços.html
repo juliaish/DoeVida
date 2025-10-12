@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DoeVida</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+  <!--leaflet-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a class="logo" href="{{ url_for('inicio') }}">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" width="200px">
+      </a>
+      <div class="mobile-menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+        <li><a href="{{ url_for('minha_area') }}">Minha Área</a></li>
+
+        <li>
+          <div class="dropdown">
+            <a class="dropbtn">Dúvidas</a>
+            <div class="dropdown-content">
+              <a href="{{ url_for('requisitos_para_doar') }}">Requisitos para Doar</a>
+              <a href="{{ url_for('tipos_sanguineos') }}">Tipos Sanguineos</a>
+              <a href="{{ url_for('pos_doacao') }}">Cuidados Pós Doação</a>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <a class="custom-btn btn-2 btn-orange" href="{{ url_for('login') }}">Login</a>
+        </li>
+        <li>
+          <a class="custom-btn btn-2 btn-blue" href="{{ url_for('cadastro') }}">Cadastro</a>
+
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+<main>
+  <div class="centralizada" style="gap: 5%;">
+    <div class="txt-index" style="text-align: left;">
+      <h1>Locais para Doação</h1>
+<ul id="lista-lugares" style="text-align: left;">
+  <li onclick="mostrarLugar('Banco de Sangue de São Paulo')">Banco de Sangue de São Paulo</li>
+  <li onclick="mostrarLugar('Hemocentro da Santa Casa de São Paulo')">Hemocentro da Santa Casa de São Paulo</li>
+  <li onclick="mostrarLugar('Hemocentro HSP Unifesp')">Hemocentro HSP Unifesp</li>
+  <li onclick="mostrarLugar('Hemocentro São Lucas')">Hemocentro São Lucas</li>
+  <li onclick="mostrarLugar('Hospital A.C Camargo')">Hospital A.C Camargo</li>
+  <li onclick="mostrarLugar('Hospital do Coração')">Hospital do Coração</li>
+  <li onclick="mostrarLugar('Hospital Israelita Albert Einstein')">Hospital Israelita Albert Einstein</li>
+  <li onclick="mostrarLugar('Hospital Leforte')">Hospital Leforte</li>
+  <li onclick="mostrarLugar('Hospital Professor Edmundo Vasconcelos')">Hospital Professor Edmundo Vasconcelos</li>
+  <li onclick="mostrarLugar('Hospital Santa Catarina')">Hospital Santa Catarina</li>
+  <li onclick="mostrarLugar('Hospital Santa Paula')">Hospital Santa Paula</li>
+  <li onclick="mostrarLugar('Hospital Sírio Libanês')">Hospital Sírio Libanês</li>
+  <li onclick="mostrarLugar('Instituto HOC de Hemoterapia')">Instituto HOC de Hemoterapia</li>
+  <li onclick="mostrarLugar('Pró Sangue')">Pró Sangue</li>
+  <li onclick="mostrarLugar('Pulsa São Paulo Banco de Sangue Paulista')">Pulsa São Paulo Banco de Sangue Paulista</li>
+</ul>
+
+      <div id="info-lugar"></div>
+    </div>
+
+    <!--ABAIXO VC MEXE NO TAMANHO DO MAPA E ONDE ELE VAI FICAR-->
+    <div id="map" style="height: 500px; width: 500px; border-radius: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.2);"></div>
+   <div style="margin-bottom: 20px;">
+    <label for="endereco-partida" style="font-family: 'Edu QLD Hand', cursive; color: #a2272c;">Digite o o local de partida (pode levar alguns segundos):</label><br>
+    <input type="text" id="endereco-partida" placeholder="Ex: Rua Vergueiro, 1000" class="caixa-text" style="width: 300px;">
+    <button onclick="buscarCoordenadas()" class="custom-btn btn-2 btn-blue" style="margin-left: 10px;">Ver rota</button>
+   </div>
+
+  </div>
+</main>
+<script src="{{ url_for('static', filename='js/mapa.js') }}"></script>
+</body>
+</html>

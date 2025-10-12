@@ -473,3 +473,30 @@ th {
 .btn-alterar {
   width: 150px;
 }
+/*daqui pra baixo é css do mapa/endereços*/
+#lista-lugares {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  font-size: 18px;
+  font-family: "Edu QLD Hand", cursive;
+  color: #a2272c;
+}
+
+#lista-lugares li {
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: 0.3s;
+}
+
+#lista-lugares li:hover {
+  color: #c94f52;
+  text-decoration: underline;
+}
+
+#info-lugar {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #a2272c;
+  font-family: "Edu QLD Hand", cursive;
+}
