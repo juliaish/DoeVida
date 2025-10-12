@@ -149,7 +149,6 @@ def minha_area():
     conn.close()
     return render_template("minha-area.html", usuario=usuario)
 
-
 @app.route("/logout")
 def logout():
     session.clear()
@@ -189,6 +188,18 @@ def questionario():
             flash("Erro ao salvar questionário. Tente novamente.", "error")
         return redirect(url_for("minha_area"))
     return render_template("questionario.html")
+
+
+@app.route("/cadastro-questionario", methods=["GET", "POST"])
+def cadastro_questionario():
+   if request.method == "POST":
+        email = request.form["email"]
+        nome = request.form["nome"]
+        sobrenome = request.form["sobrenome"]
+        senha =  request.form["senha"]
+
+        
+        return render_template(("questionario.html"),nome = nome,email = email, senha = senha, sobrenome = sobrenome)
 
 #inicializacao
 if __name__ == "__main__":

@@ -61,7 +61,7 @@ main {
   transition: 0.3s;
 }
 
-@media (max-width: 999px) {
+@media (max-width: 1200px) {
   body {
     overflow-x: hidden;
   }
@@ -108,6 +108,19 @@ main {
 
   .centralizada-endereco{
     height: auto !important;
+  }
+
+  .container-participantes{
+    flex-direction: column !important;
+    width: auto !important;
+  }
+
+  .centralizada-sobre{
+    height: auto !important;
+  }
+
+  .participante{
+    margin-bottom: 30px;
   }
 
 }
@@ -549,19 +562,44 @@ th {
   align-items: center;
 }
 
+/*estilizar msobre*/
+
 .container-participantes{
+  position:relative;
   display: flex;
   flex-direction: row;
-  width: auto 0;
+  justify-content: space-between;
+  width: 80%;
   gap: 3%;
+  overflow-x: auto;
 }
 
 .participante{
-  width: 20%;
-  height: 20%;
-  border: 2px solid #a2272c;
-  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 250px;
   padding: 20px;
+  align-items: center;
+  justify-content: center;
+  background-color: #ededed;
+  margin-top: 25px;
+}
+
+.participante img{
+  border-radius: 10px;
+}
+
+.participante span{
+  text-align: center;
+  width: 180px;
+  position: absolute;
+  color: #fff;
+  font-size: 20px;
+  font-family: "Edu QLD Hand", cursive;
+  background-color: #3e4a9d;
+  margin-bottom: 290px;
+  padding: 5px;
 }
 
 .container-sobre{
@@ -585,10 +623,11 @@ th {
 }
 
 .txt-index-sobre {
-  width: 900px;
+  width: 70%;
   height: auto;
   text-align: center;
   color: #a2272c;
   font-size: 30px;
   font-family: "Edu QLD Hand", cursive;
+  margin-bottom: 20px;
 }
