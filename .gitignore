@@ -5,3 +5,4 @@ usuarios.db
 __pycache--/
 *.__pycache
 a.env
+gemini.env
