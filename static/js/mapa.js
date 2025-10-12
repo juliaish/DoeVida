@@ -9,23 +9,83 @@
 
   const apiKey = 'eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImIwNGZlNTZmZDI0NTRjZGE4OGVhOTgyOGNiNDYyMjMwIiwiaCI6Im11cm11cjY0In0=';
 
-  const locais = {
-    "Hemocentro São Lucas": { lat: -23.652441527488598, lng: -46.710166624299525, descricao: "Centro especializado em coleta e distribuição de sangue..." },
-    "Hemocentro HSP Unifesp": { lat: -23.595216546102392, lng: -46.64477181613007, descricao: "Unidade vinculada à Unifesp..." },
-    "Hospital Leforte": { lat: -23.584295901397915, lng: -46.71764773201868, descricao: "Hospital com infraestrutura completa..." },
-    "Banco de Sangue de São Paulo": { lat: -23.574914618283813, lng: -46.64735956651362, descricao: "Instituição dedicada à coleta..." },
-    "Instituto HOC de Hemoterapia": { lat: -23.568386335325894, lng: -46.643276273801476, descricao: "Referência em hemoterapia..." },
-    "Pulsa São Paulo Banco de Sangue Paulista": { lat: -23.65425498312573, lng: -46.70495818653628, descricao: "Banco de sangue com foco em inovação..." },
-    "Pró Sangue": { lat: -23.551514547227836, lng: -46.66710931438585, descricao: "Fundação pública que promove campanhas..." },
-    "Hospital Santa Catarina": { lat: -23.566163182835588, lng: -46.64540684129627, descricao: "Hospital tradicional com atendimento humanizado..." },
-    "Hospital Sírio Libanês": { lat: -23.55694731449014, lng: -46.653678843662355, descricao: "Um dos hospitais mais renomados do Brasil..." },
-    "Hemocentro da Santa Casa de São Paulo": { lat: -23.543788971762826, lng: -46.6499739673451, descricao: "Hemocentro vinculado à Santa Casa..." },
-    "Hospital A.C Camargo": { lat: -23.561865774224916, lng: -46.63071314895875, descricao: "Referência nacional em oncologia..." },
-    "Hospital Israelita Albert Einstein": { lat: -23.59994734606646, lng: -46.71492919193734, descricao: "Hospital de excelência com foco em tecnologia..." },
-    "Hospital do Coração": { lat: -23.5728570247739, lng: -46.643683837016226, descricao: "Especializado em cardiologia..." },
-    "Hospital Professor Edmundo Vasconcelos": { lat: -23.595646809599067, lng: -46.65141330693846, descricao: "Hospital geral com atendimento humanizado..." },
-    "Hospital Santa Paula": { lat: -23.605626302361824, lng: -46.67573383538347, descricao: "Hospital moderno com diversas especialidades..." }
-  };
+const locais = {
+  "Banco de Sangue de São Paulo": {
+    lat: -23.574914618283813,
+    lng: -46.64735956651362,
+    descricao: "R. Dr. Tomás Carvalhal, 711 - Paraíso, São Paulo - SP, 04006-002"
+  },
+  "Hemocentro da Santa Casa de São Paulo": {
+    lat: -23.543788971762826,
+    lng: -46.6499739673451,
+    descricao: "R. Marquês de Itu, 579 - Vila Buarque, São Paulo - SP, 01223-001"
+  },
+  "Hemocentro HSP Unifesp": {
+    lat: -23.595216546102392,
+    lng: -46.64477181613007,
+    descricao: "R. Dr. Diogo de Faria, 824 - Vila Clementino, São Paulo - SP, 04037-002"
+  },
+  "Hemocentro São Lucas": {
+    lat: -23.652441527488598,
+    lng: -46.710166624299525,
+    descricao: "Granja Julieta - R. Amador Bueno, 229 - Piso 1 - Santo Amaro, São Paulo - SP, 04752-005"
+  },
+  "Hospital A.C Camargo": {
+    lat: -23.563307337388668,
+    lng: -46.636609326988335,
+    descricao: "R. Taguá, 440 - Liberdade, São Paulo - SP, 01508-010"
+  },
+  "Hospital do Coração": {
+    lat: -23.5728570247739,
+    lng: -46.643683837016226,
+    descricao: "R. Des. Eliseu Guilherme, 147 - Paraíso, São Paulo - SP, 04004-030"
+  },
+  "Hospital Israelita Albert Einstein": {
+    lat: -23.59994734606646,
+    lng: -46.71492919193734,
+    descricao: "Av. Albert Einstein, 627/701 - Morumbi, São Paulo - SP, 05652-900"
+  },
+  "Hospital Leforte": {
+    lat: -23.584295901397915,
+    lng: -46.71764773201868,
+    descricao: "Rua dos Três Irmãos, 121 - Morumbi, São Paulo - SP, 05615-190"
+  },
+  "Hospital Professor Edmundo Vasconcelos": {
+    lat: -23.595646809599067,
+    lng: -46.65141330693846,
+    descricao: "R. Borges Lagoa, 1450 - Vila Clementino, São Paulo - SP, 04038-905"
+  },
+  "Hospital Santa Catarina": {
+    lat: -23.566163182835588,
+    lng: -46.64540684129627,
+    descricao: "Av. Paulista, 200 - Bela Vista, São Paulo - SP, 01310-000"
+  },
+  "Hospital Santa Paula": {
+    lat: -23.605626302361824,
+    lng: -46.67573383538347,
+    descricao: "Av. Santo Amaro, 2468 - Brooklin, São Paulo - SP, 04556-100"
+  },
+  "Hospital Sírio Libanês": {
+    lat: -23.55694731449014,
+    lng: -46.653678843662355,
+    descricao: "Rua Dona Adma Jafet, 115 - Bela Vista, São Paulo - SP, 01308-050"
+  },
+  "Instituto HOC de Hemoterapia": {
+    lat: -23.568386335325894,
+    lng: -46.643276273801476,
+    descricao: "R. João Julião, 331 - Bela Vista, São Paulo - SP, 01323-020"
+  },
+  "Pró Sangue": {
+    lat: -23.551514547227836,
+    lng: -46.66710931438585,
+    descricao: "Av. Dr. Enéas Carvalho de Aguiar, 155 - 1° andar - Cerqueira César, São Paulo - SP, 05403-000"
+  },
+  "Pulsa São Paulo Banco de Sangue Paulista": {
+    lat: -23.65425498312573,
+    lng: -46.70495818653628,
+    descricao: "R. Iguatinga, 382 - Santo Amaro, São Paulo - SP, 04744-040"
+  }
+};
 
   function mostrarLugar(nome) {
     const lugar = locais[nome];
