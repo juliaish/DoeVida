@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo/logo.png') }}">
   <!-- CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
@@ -61,34 +62,34 @@
     <div class="centralizada-sobre">
       <div class="container-sobre">
         <div class="txt-index-sobre">
-          <h1>Sobre nós</h1>
+          <h1>Sobre</h1>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde optio animi nisi obcaecati fuga laborum sunt asperiores, voluptatem ipsa veniam itaque dolorum quis quidem excepturi. Modi nihil nesciunt libero perspiciatis!</p>
-        </div>
-        <div class="txt-index">
+        </div><br><br>
+        <div class="txt-index-sobre">
           <h1>Quem somos nós</h1>
-        </div>
+        </div><br>
         <div class="container-participantes">
           <div class="participante">
-            <span>Nome maneiro</span>
-            <img src="../static/img/participantes/matfoda.png" alt="">
+            <span>Wanessa Estrela</span>
+            <img src="{{ url_for('static', filename='img/participantes/wanessa.png') }}" alt="" width="200px" height="200px">
           </div>
           <div class="participante">
-            <span>Nome maneiro</span>
-            <img src="../static/img/participantes/matfoda.png" alt="">
+            <span>Julia Queiroz</span>
+            <img src="{{ url_for('static', filename='img/participantes/julia.png') }}" alt="" width="200px" height="200px">
           </div>
           <div class="participante">
-            <span>Nome maneiro</span>
-            <img src="../static/img/participantes/matfoda.png" alt="">
+            <span>Carlos Henrique</span>
+            <img src="{{ url_for('static', filename='img/participantes/wanessa.png') }}" alt="" width="200px" height="200px">
           </div>
           <div class="participante">
-            <span>Nome maneiro</span>
-            <img src="../static/img/participantes/matfoda.png" alt="">
+            <span>Gislaine Souza</span>
+            <img src="{{ url_for('static', filename='img/participantes/wanessa.png') }}" alt="" width="200px" height="200px">
           </div>
         </div>
       </div>
     </div>
   </main>
-
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>
