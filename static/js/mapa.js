@@ -35,6 +35,9 @@
 
     document.getElementById('info-lugar').innerHTML = `<h3>${nome}</h3><p>${lugar.descricao}</p>`;
 
+    //Estiliza a div com borda.
+    document.getElementById('info-lugar').style = "  border: 2px solid #a2272c;  border-radius: 8px; padding: 9px 10px; " 
+
     map.setView([lugar.lat, lugar.lng], 15);
     if (marcador) map.removeLayer(marcador);
     marcador = L.marker([lugar.lat, lugar.lng]).addTo(map).bindPopup(nome).openPopup();
