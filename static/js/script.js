@@ -47,3 +47,53 @@ const mobile = new Mobile(
   ".nav-list li",
 );
 mobile.init();
+const btnEditar = document.getElementById("btnEditar");
+const btnSalvar = document.getElementById("btnSalvar");
+const campos = document.querySelectorAll("#formPerfil input, #formPerfil select");
+
+
+btnEditar.addEventListener("click", () => {
+  campos.forEach(campo => {
+
+    if (campo.tagName === "INPUT" && campo.type !== "hidden") {
+      campo.readOnly = false;
+    }
+
+    if (campo.tagName === "SELECT") {
+      campo.disabled = false;
+    }
+  });
+  btnEditar.style.display = "none";
+  btnSalvar.style.display = "block";
+});
+
+const form = document.getElementById("formPerfil");
+form.addEventListener("submit", () => {
+  const selectTipo = document.getElementById("tipo");
+  const hiddenTipo = document.querySelector("input[type=hidden][name=tipo]");
+  if (selectTipo && hiddenTipo) {
+    hiddenTipo.value = selectTipo.value;
+  }
+
+  const selectSexo = document.getElementById("sexo_biologico");
+  const hiddenSexo = document.querySelector("input[type=hidden][name=sexo_biologico]");
+  if (selectSexo && hiddenSexo) {
+    hiddenSexo.value = selectSexo.value;
+  }
+});
+
+// mostrar/ocultar senha
+const toggleSenha = document.getElementById("toggleSenha");
+const inputSenha = document.getElementById("senha");
+
+if (toggleSenha && inputSenha) {
+  toggleSenha.addEventListener("click", () => {
+    if (inputSenha.type === "password") {
+      inputSenha.type = "text";
+      toggleSenha.textContent = "🙈";
+    } else {
+      inputSenha.type = "password";
+      toggleSenha.textContent = "👁️";
+    }
+  });
+}

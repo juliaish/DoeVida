@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from config import DevelopmentConfig, ProductionConfig, TestingConfig
+from database import get_db_connection
 from functools import wraps
 import sqlite3
 import database
@@ -118,10 +119,36 @@ def requisitos_para_doar():
 def pos_doacao():
     return render_template("pos.html")
 
-@app.route("/minha-area")
+@app.route("/minha-area", methods=["GET", "POST"])
 @login_required
 def minha_area():
-    return render_template("minha-area.html", nome=session["usuario_nome"])
+    usuario_id = session["usuario_id"]
+    conn = get_db_connection()
+
+    if request.method == "POST":
+        print("FORM RECEBIDO:", request.form)
+
+        nome = request.form.get("nome")
+        sobrenome = request.form.get("sobrenome")
+        email = request.form.get("email")
+        tipo = request.form.get("tipo")
+        sexo = request.form.get("sexo_biologico")
+
+        conn.execute("""
+            UPDATE usuarios
+            SET nome = ?, sobrenome = ?, email = ?, tipo = ?, sexo_biologico = ?
+            WHERE id = ?
+        """, (nome, sobrenome, email, tipo, sexo, usuario_id))
+        conn.commit()
+        conn.close()
+
+        flash("Dados atualizados com sucesso!", "success")
+        return redirect(url_for("minha_area"))
+
+    usuario = conn.execute("SELECT * FROM usuarios WHERE id = ?", (usuario_id,)).fetchone()
+    conn.close()
+    return render_template("minha-area.html", usuario=usuario)
+
 
 @app.route("/logout")
 def logout():
