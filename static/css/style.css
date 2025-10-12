@@ -106,6 +106,10 @@ main {
     display:none;
   }
 
+  .centralizada-endereco{
+    height: auto !important;
+  }
+
 }
 
 .nav-list.active {
@@ -419,7 +423,7 @@ th {
   color:#a2272c;
   font-size: 40px;
   font-family: "Edu QLD Hand", cursive;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .container-m-area {
@@ -439,11 +443,11 @@ th {
 
 .dados-princ {
   display: flex;
-  gap: 70px;
+  gap: 90px;
 }
 
 .dados input, select{
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .borda-arrendondada {
@@ -474,29 +478,52 @@ th {
   width: 150px;
 }
 /*daqui pra baixo é css do mapa/endereços*/
-#lista-lugares {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-  font-size: 18px;
+.lista-lugares {
+  color:#a2272c;
+  font-size: 25px;
   font-family: "Edu QLD Hand", cursive;
-  color: #a2272c;
-}
-
-#lista-lugares li {
   cursor: pointer;
-  margin-bottom: 8px;
-  transition: 0.3s;
 }
 
-#lista-lugares li:hover {
-  color: #c94f52;
-  text-decoration: underline;
+.lista-lugares h1{
+  font-family: "Edu QLD Hand", cursive;
+  font-size: 50px;
+  padding-bottom: 10px;
+ 
 }
 
-#info-lugar {
-  margin-top: 20px;
-  font-size: 18px;
+.mapa {
+  height: 450px; 
+  width: 450px; 
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  
+}
+
+.endereco-partida {
+  font-size: 25px;
   color: #a2272c;
   font-family: "Edu QLD Hand", cursive;
+  display: flex;
+  flex-direction: column; 
+  gap: 5px;     
+}
+
+.endereco-partida-sub {
+ font-size: 18px;
+  color: #c94f52;
+  font-family: "Edu QLD Hand", cursive;
+  
+}
+
+.centralizada-endereco {
+  width: 85%;
+  height: 89%;
+  margin: 0 auto;
+  background-color: #fff8f6;
+  padding: 50px;
+  display: flex;
+  gap: 10%;
+  justify-content: center;
+  align-items: center;
 }
