@@ -43,12 +43,10 @@
                     <input type="hidden" name="sobrenome" value="{{ sobrenome }}">
                     <input type="hidden" name="email" value="{{ email }}">
                     <input type="hidden" name="senha" value="{{ senha }}">
-                    <!-- data nascimento -->
 
                     <p>Digite sua data de Nascimento:</p>
                     <input type="date" name="dtNascimento" class="input-date">
 
-                    <!-- tipo sanguineo -->
                     <p>Qual seu tipo sanguineo ?</p>
                     <select name="tipo" id="tipo" class="caixa-select" required>
                         <option value="" disabled selected>Selecione...</option>
@@ -62,9 +60,9 @@
                         <option value="O-">O-</option>
                     </select>
 
-                    <!-- peso -->
                     <p >Quanto você pesa ?</p>
-                   <input class="caixa-text" type="number" id="peso" name="peso" value="50kg" > Kg<br>
+                    <label for="peso">Peso (kg):</label>
+                    <input type="number" id="peso" name="peso" value="50" min="0" max="200">
 
                     <!-- doenças -->
                     <p>Você ja teve alguma dessas doenças ?</p>

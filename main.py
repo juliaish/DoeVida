@@ -176,7 +176,6 @@ def maps():
 def questionario():
     if request.method == "POST":
         respostas = request.form.to_dict()
-        #API GEMINI VAI AQUI
         resultado = "Apto a doar"
         try:
             database.salvar_questionario(session["usuario_id"], respostas, resultado)
@@ -190,14 +189,30 @@ def questionario():
 
 @app.route("/cadastro-questionario", methods=["GET", "POST"])
 def cadastro_questionario():
-   if request.method == "POST":
+    if request.method == "POST":
         email = request.form["email"]
         nome = request.form["nome"]
         sobrenome = request.form["sobrenome"]
-        senha =  request.form["senha"]
+        senha = request.form["senha"]
 
-        
-        return render_template(("questionario.html"),nome = nome,email = email, senha = senha, sobrenome = sobrenome)
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            flash("Por favor, insira um endereço de e-mail válido.", "error")
+            return redirect(url_for("cadastro"))
+
+        if (not re.search(r"[a-z]", senha) or 
+            not re.search(r"[A-Z]", senha) or 
+            not re.search(r"\d", senha) or
+            not re.search(r"[^\w\s]", senha)):
+            flash("A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um símbolo.", "error")
+            return redirect(url_for("cadastro"))
+
+        return render_template("questionario.html",
+                           nome=nome,
+                           sobrenome=sobrenome,
+                           email=email,
+                           senha=senha)
+
+    return redirect(url_for("cadastro"))
 
 #inicializacao
 if __name__ == "__main__":
