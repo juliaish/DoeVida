@@ -260,14 +260,13 @@ main {
   background-color: #fff8f6;
   padding: 50px;
   display: flex;
-  gap:20%;
+  gap:10%;
   justify-content: center;
   align-items: center;
 }
 
 .txt-index {
-  width: 500px;
-  height: auto;
+  height: 600px;
   text-align: center;
   color:#a2272c;
   font-size: 30px;
@@ -276,9 +275,15 @@ main {
 
 .txt-index h1{
   font-family: "Edu QLD Hand", cursive;
-  font-size: 75px;
+  font-size: 65px;
   padding-bottom: 10px;
   text-align: center;
+}
+
+.txt-index p{
+width: 750px;
+height: auto;
+
 }
 
 .indeximg {
@@ -286,6 +291,12 @@ main {
   height: auto;
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 1700px) {
+  .indeximg {
+    display: none;
+  }
 }
 
 /*centralizar div cuidados pós*/
@@ -296,27 +307,29 @@ main {
   background-color: #fff8f6;
   padding: 50px;
   display: flex;
-  gap:20%;
+  gap:10%;
   justify-content: center;
   align-items: center;
 }
 
 .txt-cuidados {
-  width: 500px;
-  height: auto;
+  height: 800px;
+  text-align: center;
   color:#a2272c;
   font-size: 30px;
   font-family: "Edu QLD Hand", cursive;
 }
 
-.txt-cuidados h1{
+.txt-cuidados h1 {
   font-family: "Edu QLD Hand", cursive;
-  font-size: 75px;
-   height: auto;
-  display: flex;
-  overflow: hidden;
+  font-size: 65px;
   padding-bottom: 10px;
   text-align: center;
+}
+
+.txt-cuidados li{
+width: 850px;
+height: auto;
 }
 
 .cuidadosimg {
@@ -325,6 +338,12 @@ main {
   display: flex;
   overflow-x: hidden;
   justify-content: center;
+}
+
+@media (max-width: 1700px) {
+  .cuidadosimg {
+    display: none;
+  }
 }
 
 /*css tabela tipos sanguineos*/

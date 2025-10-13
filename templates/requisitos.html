@@ -13,9 +13,19 @@
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo/logo.png') }}">
   <!-- CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- Início do Widget VLibras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
 
-
-
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  <!-- Fim do Widget VLibras -->
 </head>
 
 <body>
@@ -48,33 +58,49 @@
           </div>
         </li>
 
-      {% if session.get('usuario_id') %}
-      <li>
-        <span class="bem-vindo">Olá, {{ session['usuario_nome'] }}!</span>
-      </li>
-      <li>
-        <a class="custom-btn-login-cadastro btn-2 btn-red" href="{{ url_for('logout') }}">Logout</a>
-      </li>
-      {% else %}
-      <li>
-        <a class="custom-btn-login-cadastro btn-2 btn-orange" href="{{ url_for('login') }}">Login</a>
-      </li>
-      <li>
-        <a class="custom-btn-login-cadastro btn-2 btn-blue" href="{{ url_for('cadastro') }}">Cadastro</a>
-      </li>
-      {% endif %}
+        {% if session.get('usuario_id') %}
+        <li>
+          <span class="bem-vindo">Olá, {{ session['usuario_nome'] }}!</span>
+        </li>
+        <li>
+          <a class="custom-btn-login-cadastro btn-2 btn-red" href="{{ url_for('logout') }}">Logout</a>
+        </li>
+        {% else %}
+        <li>
+          <a class="custom-btn-login-cadastro btn-2 btn-orange" href="{{ url_for('login') }}">Login</a>
+        </li>
+        <li>
+          <a class="custom-btn-login-cadastro btn-2 btn-blue" href="{{ url_for('cadastro') }}">Cadastro</a>
+        </li>
+        {% endif %}
       </ul>
     </nav>
   </header>
   <main>
     <div class="centralizada">
-      <div class="txt-index">
-        <h1>Requisitos para doar</h1>
-        <p>mantendo no padrao, basta editar</p>
+      <div class="cuidadosimg">
+
+        <img src="{{ url_for('static', filename='img/requisitos.png') }}" alt="Imagem 1" height="650px">
+      </div>
+      <div class="txt-cuidados">
+        <h1>Requisitos para doar:</h1>
+        <ul>
+          <li>Ter entre 16 e 69 anos (menores de 18 anos apenas com autorização dos responsáveis).</li>
+          <li>Pessoas acima de 60 anos só podem doar caso já tenham doado antes dessa idade</li>
+          <li>Possuir peso corporal igual ou superior a 50 kg.</li>
+          <li>Pesar no mínimo 50 kg.</li>
+          <li>Estar em boas condições de saúde no momento da doação.</li>
+          <li>Estar alimentado de forma adequada.</li>
+          <li>Evitar o consumo de alimentos gordurosos nas quatro horas que antecedem a doação.</li>
+          <li>Não realizar a doação em jejum.</li>
+          <li>Ter dormido pelo menos seis horas na noite anterior.</li>
+          <li>Apresentar documento oficial de identificação com foto (RG, CNH, passaporte, entre outros).</li>
+        </ul>
       </div>
     </div>
   </main>
-
+<!-- JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>

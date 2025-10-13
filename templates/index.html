@@ -14,7 +14,19 @@
   <!-- CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
+  <!-- Início do Widget VLibras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
 
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  <!-- Fim do Widget VLibras -->
 
 </head>
 
@@ -48,21 +60,21 @@
           </div>
         </li>
 
-      {% if session.get('usuario_id') %}
-      <li>
-        <span class="bem-vindo">Olá, {{ session['usuario_nome'] }}!</span>
-      </li>
-      <li>
-        <a class="custom-btn-login-cadastro btn-2 btn-red" href="{{ url_for('logout') }}">Logout</a>
-      </li>
-      {% else %}
-      <li>
-        <a class="custom-btn-login-cadastro btn-2 btn-orange" href="{{ url_for('login') }}">Login</a>
-      </li>
-      <li>
-        <a class="custom-btn-login-cadastro btn-2 btn-blue" href="{{ url_for('cadastro') }}">Cadastro</a>
-      </li>
-      {% endif %}
+        {% if session.get('usuario_id') %}
+        <li>
+          <span class="bem-vindo">Olá, {{ session['usuario_nome'] }}!</span>
+        </li>
+        <li>
+          <a class="custom-btn-login-cadastro btn-2 btn-red" href="{{ url_for('logout') }}">Logout</a>
+        </li>
+        {% else %}
+        <li>
+          <a class="custom-btn-login-cadastro btn-2 btn-orange" href="{{ url_for('login') }}">Login</a>
+        </li>
+        <li>
+          <a class="custom-btn-login-cadastro btn-2 btn-blue" href="{{ url_for('cadastro') }}">Cadastro</a>
+        </li>
+        {% endif %}
 
         </li>
       </ul>
@@ -72,9 +84,15 @@
     <div class="centralizada">
       <div class="txt-index">
         <h1>Por que doar sangue?</h1>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim culpa. Excepturi corrupti numquam
-          sapiente tempore eos impedit, laudantium nemo sint aperiam et iusto eius odit recusandae minima perferendis
-          possimus!</p>
+        <p>A doação de sangue é segura, confiável, rápida e pode salvar até quatro vidas com apenas
+          uma coleta.
+          Além de conseguir ajudar outras pessoas que precisam, o doador recebe exames gratuitos,
+          tem benefícios para a própria saúde, bem-estar emocional e ganha um dia de folga no
+          trabalho. Depois de doar, basta hidratar-se, evitar esforço intenso e não consumir álcool no
+          mesmo dia.
+          Para doar sangue, é necessário atender a alguns requisitos básicos que garante a
+          segurança do doador e de quem vai receber a doação.
+        </p>
       </div>
       <div class="indeximg">
         <img src="{{ url_for('static', filename='img/indeximg1.png') }}" alt="Imagem 1" height="700px">
