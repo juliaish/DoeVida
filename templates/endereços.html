@@ -34,7 +34,9 @@
       </div>
       <ul class="nav-list">
         <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+        {% if session.get('usuario_id') %}
         <li><a href="{{ url_for('minha_area') }}">Minha Área</a></li>
+        {% endif %}
 
         <li>
           <div class="dropdown">
@@ -47,13 +49,18 @@
           </div>
         </li>
 
+        {% if session.get('user_id') %}
+        <li>
+          <a class="custom-btn-login-cadastro btn-2 btn-red" href="{{ url_for('logout') }}">Logout</a>
+        </li>
+        {% else %}
         <li>
           <a class="custom-btn-login-cadastro btn-2 btn-orange" href="{{ url_for('login') }}">Login</a>
         </li>
         <li>
           <a class="custom-btn-login-cadastro btn-2 btn-blue" href="{{ url_for('cadastro') }}">Cadastro</a>
-
         </li>
+        {% endif %}
       </ul>
     </nav>
   </header>

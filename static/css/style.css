@@ -242,6 +242,11 @@ main {
   border: none;
 }
 
+.btn-red{
+  background:#003366;
+  border: none;
+}
+
 .btn-blue{
   background:#3e4a9d;
   border: none;
@@ -630,4 +635,10 @@ th {
   font-size: 30px;
   font-family: "Edu QLD Hand", cursive;
   margin-bottom: 20px;
+}
+.bem-vindo {
+  font-weight: bold;
+  color: #ffffff;         /* cor do texto */
+  margin-right: 10px;  /* espaço antes do botão logout */
+  font-size: 14px;     /* tamanho da fonte */
 }
