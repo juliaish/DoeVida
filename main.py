@@ -45,7 +45,6 @@ def cadastro():
         nome = request.form["nome"]
         sobrenome = request.form["sobrenome"]
         tipo = request.form["tipo"]
-        sexo_biologico = request.form["sexo_biologico"]
 
         nome = re.sub(r"[^A-Za-záàâãéèêíìîóòôõúùûüç\s-]", "", nome).strip()
         sobrenome = re.sub(r"[^A-Za-záàâãéèêíìîóòôõúùûüç\s-]", "", sobrenome).strip()
@@ -66,7 +65,7 @@ def cadastro():
         senha_hash = generate_password_hash(senha)
 
         try:
-            database.inserir_usuario(nome, sobrenome, email, senha_hash, tipo, sexo_biologico)
+            database.inserir_usuario(nome, sobrenome, email, senha_hash, tipo)
             usuario = database.buscar_usuario_por_email(email)
             session["usuario_id"] = usuario["id"]
             session["usuario_nome"] = usuario["nome"]
@@ -132,13 +131,12 @@ def minha_area():
         sobrenome = request.form.get("sobrenome")
         email = request.form.get("email")
         tipo = request.form.get("tipo")
-        sexo = request.form.get("sexo_biologico")
 
         conn.execute("""
             UPDATE usuarios
-            SET nome = ?, sobrenome = ?, email = ?, tipo = ?, sexo_biologico = ?
+            SET nome = ?, sobrenome = ?, email = ?, tipo = ?
             WHERE id = ?
-        """, (nome, sobrenome, email, tipo, sexo, usuario_id))
+        """, (nome, sobrenome, email, tipo, usuario_id))
         conn.commit()
         conn.close()
 

@@ -17,8 +17,7 @@ def init_db():
             sobrenome TEXT NOT NULL,
             email TEXT UNIQUE NOT NULL,
             senha TEXT NOT NULL,
-            tipo TEXT,
-            sexo_biologico TEXT
+            tipo TEXT
         )
         """)
         #questionario
@@ -33,13 +32,13 @@ def init_db():
         )
         """)
 
-def inserir_usuario(nome, sobrenome, email, senha_hash, tipo, sexo):
+def inserir_usuario(nome, sobrenome, email, senha_hash, tipo):
     """adiciona um novo usuario"""
     with get_db_connection() as conn:
         cursor = conn.execute("""
-            INSERT INTO usuarios (nome, sobrenome, email, senha, tipo, sexo_biologico)
+            INSERT INTO usuarios (nome, sobrenome, email, senha, tipo)
             VALUES (?, ?, ?, ?, ?, ?)
-        """, (nome, sobrenome, email, senha_hash, tipo, sexo))
+        """, (nome, sobrenome, email, senha_hash, tipo))
         conn.commit()  # Garante que a transação seja salva
         return cursor.lastrowid
 

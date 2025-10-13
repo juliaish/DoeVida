@@ -638,7 +638,31 @@ th {
 }
 .bem-vindo {
   font-weight: bold;
-  color: #ffffff;         /* cor do texto */
-  margin-right: 10px;  /* espaço antes do botão logout */
-  font-size: 14px;     /* tamanho da fonte */
+  color: #F9F9F9; 
+  margin-right: 10px;  
+  font-size: 14px;    
+}
+/* mensagem de erro*/
+.flash-messages {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.flash {
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.flash.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.flash.error {
+  background-color: #f8d7da;
+  color: #721c24;
 }
