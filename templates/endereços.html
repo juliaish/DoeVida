@@ -48,8 +48,10 @@
             </div>
           </div>
         </li>
-
-        {% if session.get('user_id') %}
+        {% if session.get('usuario_id') %}
+        <li>
+          <span class="bem-vindo">Olá, {{ session['usuario_nome'] }}!</span>
+        </li>
         <li>
           <a class="custom-btn-login-cadastro btn-2 btn-red" href="{{ url_for('logout') }}">Logout</a>
         </li>
@@ -61,6 +63,7 @@
           <a class="custom-btn-login-cadastro btn-2 btn-blue" href="{{ url_for('cadastro') }}">Cadastro</a>
         </li>
         {% endif %}
+        </li>
       </ul>
     </nav>
   </header>

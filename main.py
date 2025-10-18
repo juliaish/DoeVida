@@ -41,26 +41,10 @@ def inicio():
 @app.route("/cadastro", methods=["GET", "POST"])
 def cadastro():
     if request.method == "POST":
-        email = request.form["email"]
-        senha = request.form["senha"]
         nome = request.form["nome"]
         sobrenome = request.form["sobrenome"]
-
-        nome = re.sub(r"[^A-Za-záàâãéèêíìîóòôõúùûüç\s-]", "", nome).strip()
-        sobrenome = re.sub(r"[^A-Za-záàâãéèêíìîóòôõúùûüç\s-]", "", sobrenome).strip()
-
-        #verifica se o email ta no padrao de email
-        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
-            flash("Por favor, insira um endereço de e-mail válido.", "error")
-            return redirect(url_for("cadastro"))
-        
-        #verifica se a senha ta no padrao de letra, numero e simbolo
-        if (not re.search(r"[a-z]", senha) or 
-            not re.search(r"[A-Z]", senha) or 
-            not re.search(r"\d", senha) or
-            not re.search(r"[^\w\s]", senha)):
-            flash("A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um símbolo.", "error")
-            return redirect(url_for("cadastro"))
+        email = request.form["email"]
+        senha = request.form["senha"]
 
         senha_hash = generate_password_hash(senha)
 
@@ -72,16 +56,13 @@ def cadastro():
             flash("Cadastro realizado com sucesso!", "success")
             return redirect(url_for("minha_area"))
 
-        except sqlite3.IntegrityError:
-            flash("Erro: e-mail já cadastrado.", "error")
-            return redirect(url_for("cadastro"))
-        
         except Exception as e:
-            print(f"Ocorreu um erro inesperado: {e}")
-            flash("Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.", "error")
+            print(f"Erro no cadastro: {e}")
+            flash("Erro ao cadastrar. Verifique os dados e tente novamente.", "error")
             return redirect(url_for("cadastro"))
 
-    return render_template("login_cadastro.html", add_class = 1)
+    return render_template("login_cadastro.html", add_class=1)
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

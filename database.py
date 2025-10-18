@@ -21,15 +21,15 @@ def init_db():
         )
         """)
 
-def inserir_usuario(nome, sobrenome, email, senha_hash, tipo):
-    """adiciona um novo usuario"""
+def inserir_usuario(nome, sobrenome, email, senha_hash):
     with get_db_connection() as conn:
         cursor = conn.execute("""
-            INSERT INTO usuarios (nome, sobrenome, email, senha, tipo)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, (nome, sobrenome, email, senha_hash, tipo))
-        conn.commit()  # Garante que a transação seja salva
+            INSERT INTO usuarios (nome, sobrenome, email, senha)
+            VALUES (?, ?, ?, ?)
+        """, (nome, sobrenome, email, senha_hash))
+        conn.commit()
         return cursor.lastrowid
+
 
 def buscar_usuario_por_email(email):
     """busca usuario por email"""
