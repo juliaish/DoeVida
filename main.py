@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from werkzeug.security import generate_password_hash, check_password_hash
 from config import DevelopmentConfig, ProductionConfig, TestingConfig
 from database import get_db_connection
+from datetime import datetime
 from functools import wraps
 import sqlite3
 import database
@@ -44,7 +45,6 @@ def cadastro():
         senha = request.form["senha"]
         nome = request.form["nome"]
         sobrenome = request.form["sobrenome"]
-        tipo = request.form["tipo"]
 
         nome = re.sub(r"[^A-Za-záàâãéèêíìîóòôõúùûüç\s-]", "", nome).strip()
         sobrenome = re.sub(r"[^A-Za-záàâãéèêíìîóòôõúùûüç\s-]", "", sobrenome).strip()
@@ -65,7 +65,7 @@ def cadastro():
         senha_hash = generate_password_hash(senha)
 
         try:
-            database.inserir_usuario(nome, sobrenome, email, senha_hash, tipo)
+            database.inserir_usuario(nome, sobrenome, email, senha_hash)
             usuario = database.buscar_usuario_por_email(email)
             session["usuario_id"] = usuario["id"]
             session["usuario_nome"] = usuario["nome"]
@@ -170,49 +170,6 @@ def maps():
     longitude = data.get("longitude")
     #API...
     return {"status": "ok", "latitude": latitude, "longitude": longitude}
-
-@app.route("/questionario", methods=["GET", "POST"])
-@login_required
-def questionario():
-    if request.method == "POST":
-        respostas = request.form.to_dict()
-        resultado = "Apto a doar"
-        try:
-            database.salvar_questionario(session["usuario_id"], respostas, resultado)
-            flash("Questionário salvo com sucesso!", "success")
-        except Exception as e:
-            print(f"Erro ao salvar questionário: {e}")
-            flash("Erro ao salvar questionário. Tente novamente.", "error")
-        return redirect(url_for("minha_area"))
-    return render_template("questionario.html")
-
-
-@app.route("/cadastro-questionario", methods=["GET", "POST"])
-def cadastro_questionario():
-    if request.method == "POST":
-        email = request.form["email"]
-        nome = request.form["nome"]
-        sobrenome = request.form["sobrenome"]
-        senha = request.form["senha"]
-
-        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
-            flash("Por favor, insira um endereço de e-mail válido.", "error")
-            return redirect(url_for("cadastro"))
-
-        if (not re.search(r"[a-z]", senha) or 
-            not re.search(r"[A-Z]", senha) or 
-            not re.search(r"\d", senha) or
-            not re.search(r"[^\w\s]", senha)):
-            flash("A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um símbolo.", "error")
-            return redirect(url_for("cadastro"))
-
-        return render_template("questionario.html",
-                           nome=nome,
-                           sobrenome=sobrenome,
-                           email=email,
-                           senha=senha)
-
-    return redirect(url_for("cadastro"))
 
 #inicializacao
 if __name__ == "__main__":

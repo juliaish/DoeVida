@@ -74,12 +74,6 @@ form.addEventListener("submit", () => {
   if (selectTipo && hiddenTipo) {
     hiddenTipo.value = selectTipo.value;
   }
-
-  const selectSexo = document.getElementById("sexo_biologico");
-  const hiddenSexo = document.querySelector("input[type=hidden][name=sexo_biologico]");
-  if (selectSexo && hiddenSexo) {
-    hiddenSexo.value = selectSexo.value;
-  }
 });
 
 // mostrar/ocultar senha
@@ -96,4 +90,4 @@ if (toggleSenha && inputSenha) {
       toggleSenha.textContent = "👁️";
     }
   });
-}
+};

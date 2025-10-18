@@ -9,38 +9,32 @@ document.querySelector(".form-questionario").addEventListener("submit", async fu
     respostas[key] = value;
   });
 
-  const prompt = `
-Avalie se esta pessoa está apta para doar sangue com base nas respostas abaixo. Responda apenas com "Apto" ou "Inapto".
+  const idadeMin = 16;
+  const idadeMax = 69;
+  const pesoMin = 50;
 
-- Data de nascimento: ${respostas.dtNascimento}
-- Gênero: ${respostas.genero}
-- Tipo sanguíneo: ${respostas.tipo}
-- Peso: ${respostas.peso}
-- Teve doenças graves (HIV, hepatite, etc): ${respostas.doencasgerais}
-- Problema cardíaco grave: ${respostas.problemacardiaco}
-- Diabetes: ${respostas.diabetes}
-- Câncer no sangue: ${respostas.cancersangue}
-- Doença renal crônica: ${respostas.doencarenal}
-- Problemas de coagulação: ${respostas.problemacoagulacao}
-- Epilepsia: ${respostas.problemaepilepsia}
-- Doença autoimune em órgãos: ${respostas.doencaorgaos}
-`;
-const GEMINI_API_KEY = "AIzaSyBCnayTPVuRYOeCU178SrIn1uui5XdLXzE"; 
+  const hoje = new Date();
+  const nascimento = new Date(respostas.dtNascimento);
+  const idade = hoje.getFullYear() - nascimento.getFullYear();
+  const peso = parseFloat(respostas.peso);
 
-  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=SUA_API_KEY", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }]
-    })
-  });
+  const inaptos = [
+    respostas.doencasgerais ==="sim",
+    respostas.problemacardiaco ==="sim",
+    respostas.diabetes === "insulina",
+    respostas.cancersangue === "sim",
+    respostas.doencarenal === "sim",
+    respostas.problemacoagulacao === "sim",
+    respostas.problemaepilepsia === "recorrente",
+    respostas.doencaorgaos === "sim",
+    idade < idadeMin || idade > idadeMax,
+    peso < pesoMin
+  ];
 
-  const result = await response.json();
-  const output = result?.candidates?.[0]?.content?.parts?.[0]?.text || "Erro na análise";
-
-  if (output.includes("Apto")) {
-    form.submit(); 
+  if (inaptos.incluedes(true)) {
+    alert("Você nao está apto para doar sangue no momento.");
   } else {
-    alert("Você não está apto para doar sangue neste momento.");
+    alert("Parabéns! Você está apto para doar sangue.");
+    form.submit();
   }
 });

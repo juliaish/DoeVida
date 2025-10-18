@@ -6,3 +6,5 @@ __pycache--/
 *.__pycache
 a.env
 gemini.env
+questionario.html
+questionario.js
