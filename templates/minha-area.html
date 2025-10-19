@@ -99,17 +99,6 @@
             </select>
             <!-- hidden para enviar valor -->
             <input type="hidden" name="tipo" value="{{ usuario['tipo'] }}"><br>
-
-            <label for="sexo_biologico">Gênero: </label><br>
-            <select class="caixa-select" id="sexo_biologico" name="sexo_biologico" disabled>
-              <option value="Homem" {% if usuario['sexo_biologico']=="Homem" %}selected{% endif %}>Homem</option>
-              <option value="Mulher" {% if usuario['sexo_biologico']=="Mulher" %}selected{% endif %}>Mulher</option>
-              <option value="Não-binário" {% if usuario['sexo_biologico']=="Não-binário" %}selected{% endif %}>Não-binário</option>
-              <option value="Outro" {% if usuario['sexo_biologico']=="Outro" %}selected{% endif %}>Outro</option>
-            </select>
-            <!-- hidden para enviar valor -->
-            <input type="hidden" name="sexo_biologico" value="{{ usuario['sexo_biologico'] }}">
-          </div>
         </div>
 
         <input class="btn-alterar btn-orange custom-btn" type="submit" id="btnSalvar" value="Salvar" style="display: none;">

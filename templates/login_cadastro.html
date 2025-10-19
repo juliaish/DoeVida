@@ -58,15 +58,16 @@
   </header>
   <div class="login">
 
+    <!-- bloco para exibir mensagens flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-        <ul class="flash-messages">
-           {% for category, message in messages %}
-             <li class="flash {{ category }}">{{ message }}</li>
-           {% endfor %}
+        <ul>
+          {% for category, message in messages %}
+          {% endfor %}
         </ul>
       {% endif %}
     {% endwith %}
+
 
     <div class="container {%if add_class %} active {% endif %}" id="container">
       <div class="form-container sign-up">

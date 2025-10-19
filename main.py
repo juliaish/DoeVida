@@ -38,31 +38,30 @@ def login_required(f):
 def inicio():
     return render_template("index.html")
 
-@app.route("/cadastro", methods=["GET", "POST"])
-def cadastro():
-    if request.method == "POST":
-        nome = request.form["nome"]
-        sobrenome = request.form["sobrenome"]
-        email = request.form["email"]
-        senha = request.form["senha"]
+@app.route("/sobre")
+def sobre():
+    return render_template("sobre.html")
 
-        senha_hash = generate_password_hash(senha)
+@app.route("/tipos-sanguineos")
+def tipos_sanguineos():
+    return render_template("tipos-sanguineos.html")
 
-        try:
-            database.inserir_usuario(nome, sobrenome, email, senha_hash)
-            usuario = database.buscar_usuario_por_email(email)
-            session["usuario_id"] = usuario["id"]
-            session["usuario_nome"] = usuario["nome"]
-            flash("Cadastro realizado com sucesso!", "success")
-            return redirect(url_for("minha_area"))
+@app.route("/requisitos-para-doar")
+def requisitos_para_doar():
+    return render_template("requisitos.html")
 
-        except Exception as e:
-            print(f"Erro no cadastro: {e}")
-            flash("Erro ao cadastrar. Verifique os dados e tente novamente.", "error")
-            return redirect(url_for("cadastro"))
+@app.route("/pos-doacao")
+def pos_doacao():
+    return render_template("pos.html")
 
-    return render_template("login_cadastro.html", add_class=1)
+@app.route("/doe-aqui")
+@login_required
+def doe_aqui():
+    return render_template("doe-aqui.html")
 
+@app.route("/endereços")
+def endereços():
+    return render_template("endereços.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -83,21 +82,110 @@ def login():
 
     return render_template("login_cadastro.html")
 
-@app.route("/sobre")
-def sobre():
-    return render_template("sobre.html")
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("Você saiu da sua conta.", "success")
+    return redirect(url_for("inicio"))
 
-@app.route("/tipos-sanguineos")
-def tipos_sanguineos():
-    return render_template("tipos-sanguineos.html")
+@app.route("/cadastro", methods=["GET", "POST"])
+def cadastro():
+    if request.method == "POST":
+        nome = request.form["nome"]
+        sobrenome = request.form["sobrenome"]
+        email = request.form["email"]
+        senha = request.form["senha"]
 
-@app.route("/requisitos-para-doar")
-def requisitos_para_doar():
-    return render_template("requisitos.html")
+        # validação de e-mail
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            flash("Insira um endereço de e-mail válido.", "error")
+            return redirect(url_for("cadastro"))
 
-@app.route("/pos-doacao")
-def pos_doacao():
-    return render_template("pos.html")
+        # validação de senha (maiúscula, minúscula, número e símbolo obrigatórios)
+        if (not re.search(r"[a-z]", senha) or
+            not re.search(r"[A-Z]", senha) or
+            not re.search(r"\d", senha) or
+            not re.search(r"[^\w\s]", senha)):
+            flash("A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um símbolo.", "error")
+            return redirect(url_for("cadastro"))
+        session["temp_nome"] = nome
+        session["temp_sobrenome"] = sobrenome
+        session["temp_email"] = email
+        session["temp_senha"] = senha
+
+        return redirect(url_for("questionario"))
+    return render_template("login_cadastro.html", add_class=1)
+
+@app.route("/questionario", methods=["GET", "POST"])
+def questionario():
+    if request.method == "POST":
+        respostas = {
+            "dtNascimento": request.form.get("dtNascimento"),
+            "peso": request.form.get("peso"),
+            "tipo": request.form.get("tipo"),
+            "doencasgerais": request.form.get("doencasgerais"),
+            "problemacardiaco": request.form.get("problemacardiaco"),
+            "diabetes": request.form.get("diabetes"),
+            "cancersangue": request.form.get("cancersangue"),
+            "doencarenal": request.form.get("doencarenal"),
+            "problemacoagulacao": request.form.get("problemacoagulacao"),
+            "problemaepilepsia": request.form.get("problemaepilepsia"),
+            "doencaorgaos": request.form.get("doencaorgaos")
+        }
+        idadeMin = 16
+        idadeMax = 69
+        pesoMin = 50
+        try:
+            nascimento = datetime.strptime(respostas["dtNascimento"], "%Y-%m-%d")
+            hoje = datetime.today()
+            idade = hoje.year - nascimento.year - ((hoje.month, hoje.day) < (nascimento.month, nascimento.day))
+            peso = float(respostas["peso"])
+        except (ValueError, TypeError):
+            flash("Dados inválidos. Verifique sua data de nascimento e peso.", "error")
+            return redirect(url_for("questionario"))
+
+        inaptos = [
+            respostas["doencasgerais"] == "sim",
+            respostas["problemacardiaco"] == "sim",
+            respostas["diabetes"] == "insulina",
+            respostas["cancersangue"] == "sim",
+            respostas["doencarenal"] == "sim",
+            respostas["problemacoagulacao"] == "sim",
+            respostas["problemaepilepsia"] == "recorrente",
+            respostas["doencaorgaos"] == "sim",
+            idade < idadeMin or idade > idadeMax,
+            peso < pesoMin
+        ]
+
+        if any(inaptos):
+            flash("Você está inapto a doar sangue no momento, mas ainda pode nos ajudar!", "warning")
+            for key in ["temp_nome", "temp_sobrenome", "temp_senha", "temp_email"]:
+             session.pop(key, None)
+            return redirect(url_for("inicio"))
+        else:
+            nome = session.get("temp_nome")
+            sobrenome = session.get("temp_sobrenome")
+            email = session.get("temp_email")
+            senha = session.get("temp_senha")
+            senha_hash = generate_password_hash(senha)
+            tipo = respostas["tipo"]
+
+            try:
+                database.inserir_usuario(nome, sobrenome, email, senha_hash)
+                usuario = database.buscar_usuario_por_email(email)
+                session["usuario_id"] = usuario["id"]
+                session["usuario_nome"] = usuario["nome"]
+
+                for key in ["temp_nome", "temp_sobrenome", "temp_senha", "temp_email"]:
+                    session.pop(key, None)
+
+                flash("Cadastro concluído com sucesso!", "success")
+                return redirect(url_for("minha_area"))
+            except sqlite3.IntegrityError:
+                flash("Erro: e-mail já cadastrado.", "error")
+                return redirect(url_for("cadastro"))
+    return render_template("questionario.html")
+
 
 @app.route("/minha-area", methods=["GET", "POST"])
 @login_required
@@ -127,21 +215,6 @@ def minha_area():
     usuario = conn.execute("SELECT * FROM usuarios WHERE id = ?", (usuario_id,)).fetchone()
     conn.close()
     return render_template("minha-area.html", usuario=usuario)
-
-@app.route("/logout")
-def logout():
-    session.clear()
-    flash("Você saiu da sua conta.", "success")
-    return redirect(url_for("inicio"))
-
-@app.route("/doe-aqui")
-@login_required
-def doe_aqui():
-    return render_template("doe-aqui.html")
-
-@app.route("/endereços")
-def endereços():
-    return render_template("endereços.html")
 
 @app.route("/maps", methods=["POST"])
 @login_required

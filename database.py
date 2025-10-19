@@ -21,12 +21,12 @@ def init_db():
         )
         """)
 
-def inserir_usuario(nome, sobrenome, email, senha_hash):
+def inserir_usuario(nome, sobrenome, email, senha_hash, tipo):
     with get_db_connection() as conn:
         cursor = conn.execute("""
-            INSERT INTO usuarios (nome, sobrenome, email, senha)
+            INSERT INTO usuarios (nome, sobrenome, email, senha, tipo)
             VALUES (?, ?, ?, ?)
-        """, (nome, sobrenome, email, senha_hash))
+        """, (nome, sobrenome, email, senha_hash, tipo))
         conn.commit()
         return cursor.lastrowid
 

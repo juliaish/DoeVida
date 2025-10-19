@@ -1,13 +1,11 @@
-document.querySelector(".form-questionario").addEventListener("submit", async function (e) {
+
+document.querySelector(".form-questionario").addEventListener("submit", function (e) {
   e.preventDefault();
 
   const form = e.target;
   const formData = new FormData(form);
   const respostas = {};
-
-  formData.forEach((value, key) => {
-    respostas[key] = value;
-  });
+  formData.forEach((value, key) => respostas[key] = value);
 
   const idadeMin = 16;
   const idadeMax = 69;
@@ -15,12 +13,12 @@ document.querySelector(".form-questionario").addEventListener("submit", async fu
 
   const hoje = new Date();
   const nascimento = new Date(respostas.dtNascimento);
-  const idade = hoje.getFullYear() - nascimento.getFullYear();
+  const idade = hoje.getFullYear() - nascimento.getFullYear() - ((hoje.getMonth() < nascimento.getMonth()) || (hoje.getMonth() === nascimento.getMonth() && hoje.getDate() < nascimento.getDate()) ? 1 : 0);
   const peso = parseFloat(respostas.peso);
 
   const inaptos = [
-    respostas.doencasgerais ==="sim",
-    respostas.problemacardiaco ==="sim",
+    respostas.doencasgerais === "sim",
+    respostas.problemacardiaco === "sim",
     respostas.diabetes === "insulina",
     respostas.cancersangue === "sim",
     respostas.doencarenal === "sim",
@@ -31,10 +29,24 @@ document.querySelector(".form-questionario").addEventListener("submit", async fu
     peso < pesoMin
   ];
 
-  if (inaptos.incluedes(true)) {
-    alert("Você nao está apto para doar sangue no momento.");
+  document.getElementById("botao-enviar").style.display = "none";
+
+  const mensagemContainer = document.getElementById("mensagem-container");
+  window.scrollTo({
+  top: 0,
+  behavior: "smooth"
+  });
+
+  const mensagemTexto = document.getElementById("mensagem-texto");
+  const mensagemBotao = document.getElementById("mensagem-botao");
+
+  mensagemContainer.style.display = "block";
+
+  if (inaptos.includes(true)) {
+    mensagemTexto.textContent = "Você não está apto para doar sangue no momento.";
+    mensagemBotao.onclick = () => window.location.href = "/";
   } else {
-    alert("Parabéns! Você está apto para doar sangue.");
-    form.submit();
+    mensagemTexto.textContent = "Parabéns! Você está apto para doar sangue.";
+    mensagemBotao.onclick = () => form.submit();
   }
 });

@@ -429,30 +429,22 @@ th {
   font-family: "Edu QLD Hand", cursive;   
   font-size: 20px;                  
   color: #a2272c;                    
-
-  background-color: #ffffff;        
+       
   border: 2px solid #a2272c;           
   border-radius: 8px;              
   padding: 5px;         
-  cursor: pointer;                  
+  cursor: pointer;     
 }
 
-
-.input-date:focus {
-  border-color: #ffe1da;            
-  outline: none; 
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 24px;
+  color: #a2272c;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
 }
-
-.input-date::-webkit-calendar-picker-indicator {
-  background: none;
-  color: transparent;
-  cursor: pointer;
-}
-
-.input-date::-moz-focus-inner {
-  border: 0;
-}
-
 
 .button-div{
   display: flex;
@@ -661,6 +653,24 @@ th {
   margin-right: 10px;  
   font-size: 14px;    
 }
+.mensagem-container {
+  display: none; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  margin-bottom: 20px;
+  height: 80px;
+  width: 700px;
+}
+.mensagem-texto {
+  color: #a2272c;
+  font-size:24px;
+  text-align: center;
+}
+
 /* mensagem de erro*/
 .flash-messages {
   list-style: none;
