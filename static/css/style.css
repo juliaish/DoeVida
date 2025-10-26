@@ -155,6 +155,16 @@ main {
     width: 250px !important;
   }
 
+  .centralizada-endereco{
+    padding: 29px !important;
+    flex-direction: column;
+  }
+
+  .mapa{
+    height: 300px !important;
+    width: 300px !important;
+  }
+
 }
 
 .nav-list.active {
