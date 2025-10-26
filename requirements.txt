@@ -1,0 +1,4 @@
+Flask>=2.3.2
+werkzeug>=2.3.7
+python-dotenv>=1.0.0
+google-generative-ai>=0.2.0
