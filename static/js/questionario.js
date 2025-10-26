@@ -1,52 +1,41 @@
+document.querySelector(".form-questionario").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-document.querySelector(".form-questionario").addEventListener("submit", function (e) {
-  e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const dados = {};
+    formData.forEach((v, k) => dados[k] = v);
 
-  const form = e.target;
-  const formData = new FormData(form);
-  const respostas = {};
-  formData.forEach((value, key) => respostas[key] = value);
+    const botao = document.getElementById("botao-enviar");
+    botao.style.display = "none";
 
-  const idadeMin = 16;
-  const idadeMax = 69;
-  const pesoMin = 50;
+    fetch("/avaliar-questionario", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dados)
+    })
+    .then(res => res.json())
+    .then(resp => {
+        const mensagemContainer = document.getElementById("mensagem-container");
+        const mensagemTexto = document.getElementById("mensagem-texto");
+        const mensagemBotao = document.getElementById("mensagem-botao");
 
-  const hoje = new Date();
-  const nascimento = new Date(respostas.dtNascimento);
-  const idade = hoje.getFullYear() - nascimento.getFullYear() - ((hoje.getMonth() < nascimento.getMonth()) || (hoje.getMonth() === nascimento.getMonth() && hoje.getDate() < nascimento.getDate()) ? 1 : 0);
-  const peso = parseFloat(respostas.peso);
+        mensagemContainer.style.display = "block";
+        mensagemTexto.textContent = resp.parecer;
 
-  const inaptos = [
-    respostas.doencasgerais === "sim",
-    respostas.problemacardiaco === "sim",
-    respostas.diabetes === "insulina",
-    respostas.cancersangue === "sim",
-    respostas.doencarenal === "sim",
-    respostas.problemacoagulacao === "sim",
-    respostas.problemaepilepsia === "recorrente",
-    respostas.doencaorgaos === "sim",
-    idade < idadeMin || idade > idadeMax,
-    peso < pesoMin
-  ];
+        mensagemBotao.onclick = () => {
+            if(resp.parecer.toUpperCase().includes("APTO")) {
+                form.submit();
+            } else {
+                window.location.href = "/";
+            }
+        };
 
-  document.getElementById("botao-enviar").style.display = "none";
-
-  const mensagemContainer = document.getElementById("mensagem-container");
-  window.scrollTo({
-  top: 0,
-  behavior: "smooth"
-  });
-
-  const mensagemTexto = document.getElementById("mensagem-texto");
-  const mensagemBotao = document.getElementById("mensagem-botao");
-
-  mensagemContainer.style.display = "block";
-
-  if (inaptos.includes(true)) {
-    mensagemTexto.textContent = "Você não está apto para doar sangue no momento.";
-    mensagemBotao.onclick = () => window.location.href = "/";
-  } else {
-    mensagemTexto.textContent = "Parabéns! Você está apto para doar sangue.";
-    mensagemBotao.onclick = () => form.submit();
-  }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    })
+    .catch(err => {
+        alert("Erro ao processar o questionário.");
+        console.error(err);
+        botao.style.display = "block";
+    });
 });

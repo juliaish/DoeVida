@@ -25,11 +25,12 @@ def inserir_usuario(nome, sobrenome, email, senha_hash, tipo):
     with get_db_connection() as conn:
         cursor = conn.execute("""
             INSERT INTO usuarios (nome, sobrenome, email, senha, tipo)
-            VALUES (?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?)
         """, (nome, sobrenome, email, senha_hash, tipo))
         conn.commit()
-        return cursor.lastrowid
-
+        last_id = cursor.lastrowid
+        cursor.close()
+        return last_id
 
 def buscar_usuario_por_email(email):
     """busca usuario por email"""

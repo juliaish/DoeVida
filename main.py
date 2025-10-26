@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from werkzeug.security import generate_password_hash, check_password_hash
 from config import DevelopmentConfig, ProductionConfig, TestingConfig
 from database import get_db_connection
+import google.generativeai as genai
+from dotenv import load_dotenv
 from datetime import datetime
 from functools import wraps
 import sqlite3
@@ -9,11 +11,12 @@ import database
 import re
 import os
 
+load_dotenv()
 app = Flask(__name__)
-app.config.from_pyfile('config.py')
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=GEMINI_API_KEY)
 
 env = os.environ.get("FLASK_ENV", "development")
-
 if env == "production":
     app.config.from_object(ProductionConfig)
 elif env == "testing":
@@ -23,7 +26,7 @@ else:
 
 database.init_db()
 
-#decorador python
+#decoradores python
 def login_required(f):
     @wraps(f)
     def decor_funcao(*args, **kwargs):
@@ -33,6 +36,15 @@ def login_required(f):
         return f(*args, **kwargs)
     return decor_funcao
 
+def cadastro_temp_required(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        if not all(k in session for k in ["temp_nome", "temp_sobrenome", "temp_email", "temp_senha"]):
+            flash("Você precisa preencher o cadastro antes de acessar o questionário.", "error")
+            return redirect(url_for("cadastro"))
+        return f(*args, **kwargs)
+    return wrapper
+#------------------------------------------------------------------------------
 #rotas para paginas
 @app.route("/")
 def inicio():
@@ -62,7 +74,8 @@ def doe_aqui():
 @app.route("/endereços")
 def endereços():
     return render_template("endereços.html")
-
+#------------------------------------------------------------------------------
+#login, cadastro, minha area e mapa
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -116,6 +129,45 @@ def cadastro():
         return redirect(url_for("questionario"))
     return render_template("login_cadastro.html", add_class=1)
 
+@app.route("/minha-area", methods=["GET", "POST"])
+@login_required
+def minha_area():
+    usuario_id = session["usuario_id"]
+    conn = get_db_connection()
+
+    if request.method == "POST":
+        print("FORM RECEBIDO:", request.form)
+
+        nome = request.form.get("nome")
+        sobrenome = request.form.get("sobrenome")
+        email = request.form.get("email")
+        tipo = request.form.get("tipo")
+
+        conn.execute("""
+            UPDATE usuarios
+            SET nome = ?, sobrenome = ?, email = ?, tipo = ?
+            WHERE id = ?
+        """, (nome, sobrenome, email, tipo, usuario_id))
+        conn.commit()
+        conn.close()
+
+        flash("Dados atualizados com sucesso!", "success")
+        return redirect(url_for("minha_area"))
+
+    usuario = conn.execute("SELECT * FROM usuarios WHERE id = ?", (usuario_id,)).fetchone()
+    conn.close()
+    return render_template("minha-area.html", usuario=usuario)
+
+@app.route("/maps", methods=["POST"])
+@login_required
+def maps():
+    data = request.get_json(silent=True) or {}
+    latitude = data.get("latitude")
+    longitude = data.get("longitude")
+    #API...
+    return {"status": "ok", "latitude": latitude, "longitude": longitude}
+#------------------------------------------------------------------------------
+#questionario
 @app.route("/questionario", methods=["GET", "POST"])
 def questionario():
     if request.method == "POST":
@@ -186,45 +238,66 @@ def questionario():
                 return redirect(url_for("cadastro"))
     return render_template("questionario.html")
 
+def avaliar_aptidao_via_ia(dados):
+    modelo = genai.GenerativeModel("models/gemini-2.5-flash")
 
-@app.route("/minha-area", methods=["GET", "POST"])
-@login_required
-def minha_area():
-    usuario_id = session["usuario_id"]
-    conn = get_db_connection()
+    prompt = f"""
+    Você é um avaliador médico de triagem de doadores de sangue.
+    Analise as informações do doador e responda apenas "APTO" ou "INAPTO"
+    conforme os critérios de saúde e segurança de doação.
 
-    if request.method == "POST":
-        print("FORM RECEBIDO:", request.form)
+    Dados do doador:
+    - Idade: {dados.get("idade")}
+    - Peso: {dados.get("peso")}
+    - Doenças gerais: {dados.get("doencasgerais")}
+    - Problemas cardíacos: {dados.get("problemacardiaco")}
+    - Diabetes: {dados.get("diabetes")}
+    - Câncer no sangue: {dados.get("cancersangue")}
+    - Doença renal: {dados.get("doencarenal")}
+    - Problemas de coagulação: {dados.get("problemacoagulacao")}
+    - Epilepsia: {dados.get("problemaepilepsia")}
+    - Doença em órgãos: {dados.get("doencaorgaos")}
 
-        nome = request.form.get("nome")
-        sobrenome = request.form.get("sobrenome")
-        email = request.form.get("email")
-        tipo = request.form.get("tipo")
+    Retorne apenas uma palavra: APTO ou INAPTO.
+    """
 
-        conn.execute("""
-            UPDATE usuarios
-            SET nome = ?, sobrenome = ?, email = ?, tipo = ?
-            WHERE id = ?
-        """, (nome, sobrenome, email, tipo, usuario_id))
-        conn.commit()
-        conn.close()
+    resposta = modelo.generate_content(prompt)
+    resultado = resposta.text.strip()
 
-        flash("Dados atualizados com sucesso!", "success")
-        return redirect(url_for("minha_area"))
+    print("\n===== RESPOSTA DO GEMINI =====")
+    print(resultado)
+    print("===== FIM DA RESPOSTA =====\n")
 
-    usuario = conn.execute("SELECT * FROM usuarios WHERE id = ?", (usuario_id,)).fetchone()
-    conn.close()
-    return render_template("minha-area.html", usuario=usuario)
+    texto = resposta.text.strip().upper()
 
-@app.route("/maps", methods=["POST"])
-@login_required
-def maps():
-    data = request.get_json(silent=True) or {}
-    latitude = data.get("latitude")
-    longitude = data.get("longitude")
-    #API...
-    return {"status": "ok", "latitude": latitude, "longitude": longitude}
+    if "INAPTO" in texto:
+        return "INAPTO"
+    return "APTO"
 
+@app.route("/avaliar-questionario", methods=["POST"])
+@cadastro_temp_required
+def avaliar_questionario():
+    dados = request.get_json() or {}
+
+    try:
+        nascimento = datetime.strptime(dados["dtNascimento"], "%Y-%m-%d")
+        hoje = datetime.today()
+        idade = hoje.year - nascimento.year - ((hoje.month, hoje.day) < (nascimento.month, nascimento.day))
+        peso = float(dados["peso"])
+    except (ValueError, TypeError, KeyError):
+        return {"parecer": "Você não está apto para doar sangue no momento."}
+
+    dados["idade"] = idade
+    dados["peso"] = peso
+    parecer = avaliar_aptidao_via_ia(dados)
+
+    if parecer == "APTO":
+        mensagem = "Parabéns! Você está apto para doar sangue."
+    else:
+        mensagem = "Você não está apto para doar sangue no momento."
+
+    return {"parecer": mensagem}
+#------------------------------------------------------------------------------
 #inicializacao
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

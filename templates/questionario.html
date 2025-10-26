@@ -11,154 +11,152 @@
 </head>
 <body>
 <!-- Widget VLibras -->
-  <div vw class="enabled">
+<div vw class="enabled">
     <div vw-access-button class="active"></div>
     <div vw-plugin-wrapper>
-      <div class="vw-plugin-top-wrapper"></div>
+        <div class="vw-plugin-top-wrapper"></div>
     </div>
-  </div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
     new window.VLibras.Widget('https://vlibras.gov.br/app');
-  </script> 
+</script> 
 
-    <header>
-        <nav>
-            <a class="logo" href="{{ url_for('inicio') }}">
-                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" width="200px">
-            </a>
-            <div class="mobile-menu">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-            <ul class="nav-list">
-                <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
-
-                <li>
-                    <div class="dropdown">
-                        <a class="dropbtn">Dúvidas</a>
-                        <div class="dropdown-content">
-                            <a href="{{ url_for('requisitos_para_doar') }}">Requisitos para Doar</a>
-                            <a href="{{ url_for('tipos_sanguineos') }}">Tipos Sanguineos</a>
-                            <a href="{{ url_for('pos_doacao') }}">Cuidados Pós Doação</a>
-                        </div>
+<header>
+    <nav>
+        <a class="logo" href="{{ url_for('inicio') }}">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" width="200px">
+        </a>
+        <div class="mobile-menu">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <ul class="nav-list">
+            <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+            <li>
+                <div class="dropdown">
+                    <a class="dropbtn">Dúvidas</a>
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('requisitos_para_doar') }}">Requisitos para Doar</a>
+                        <a href="{{ url_for('tipos_sanguineos') }}">Tipos Sanguíneos</a>
+                        <a href="{{ url_for('pos_doacao') }}">Cuidados Pós Doação</a>
                     </div>
-                </li>
-              </ul>
-        </nav>
-    </header>
- <main>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
     <!-- bloco para exibir mensagens flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <ul>
-          {% for category, message in messages %}
-          {% endfor %}
-        </ul>
-      {% endif %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     {% endwith %}
-  <div class="questionario">
-  <h1>Triagem para cadastro</h1>
 
-     <div id="mensagem-container" class="mensagem-container">
-       <p id="mensagem-texto" class="mensagem-texto"></p>
-       <div class="button-div">
-        <button id="mensagem-botao" class="custom-btn btn-2 btn-blue btn-quest">Entendi</button>
-       </div>
-     </div>
- <div id="questionario-container">
-  <form class="form-questionario" action="{{ url_for('questionario') }}" method="POST">
+    <div class="questionario">
+        <h1>Triagem para cadastro</h1>
 
-    <label for="dtNascimento">Data de Nascimento:</label>
-    <input class="input-date" type="date" name="dtNascimento" required><br>
+        <!-- mensagem aptidão/inaptidão -->
+        <div id="mensagem-container" class="mensagem-container" style="display: none;">
+            <p id="mensagem-texto" class="mensagem-texto"></p>
+            <div class="button-div">
+                <button id="mensagem-botao" class="custom-btn btn-2 btn-blue btn-quest">Entendi</button>
+            </div>
+        </div>
 
-    <label for="peso">Peso (kg):</label>
-    <input class="input-date" type="number" name="peso" required><br>
+        <div id="questionario-container">
+            <form class="form-questionario" action="{{ url_for('questionario') }}" method="POST">
+                <label for="dtNascimento">Data de Nascimento:</label>
+                <input class="input-date" type="date" name="dtNascimento" required><br>
 
-    <label for="tipo">Tipo Sanguíneo:</label>
-    <select class="caixa-select" id="tipo" name="tipo" required>
-      <option value="">Selecione...</option>
-      <option value="A+">A+</option>
-      <option value="A-">A-</option>
-      <option value="B+">B+</option>
-      <option value="B-">B-</option>
-      <option value="AB+">AB+</option>
-      <option value="AB-">AB-</option>
-      <option value="O+">O+</option>
-      <option value="O-">O-</option>
-    </select>
+                <label for="peso">Peso (kg):</label>
+                <input class="input-date" type="number" name="peso" required><br>
 
-    <label>Você já teve alguma dessas doenças?</label>
-    <ul>
-    <li>HIV/AIDS</li>
-    <li>Hepatite B ou C</li>
-    <li>Doença de Chagas</li>
-    <li>Malária</li>
-    <li>HTLV I/II</li>
-    </ul>
-    <select class="caixa-select" name="doencasgerais" required>
-      <option value="nao">Não</option>
-      <option value="sim">Sim</option>
-    </select>
+                <label for="tipo">Tipo Sanguíneo:</label>
+                <select class="caixa-select" id="tipo" name="tipo" required>
+                    <option value="">Selecione...</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
 
-    <label>Você possui alguma doença cardíaca grave (ex: insuficiência cardíaca, arritmia grave, cardiopatia congênita não tratada)?</label>
-    <select class="caixa-select" name="problemacardiaco" required>
-      <option value="nao">Não</option>
-      <option value="sim">Sim</option>
-    </select>
+                <label>Você já teve alguma dessas doenças?</label>
+                <ul>
+                    <li>HIV/AIDS</li>
+                    <li>Hepatite B ou C</li>
+                    <li>Doença de Chagas</li>
+                    <li>Malária</li>
+                    <li>HTLV I/II</li>
+                </ul>
+                <select class="caixa-select" name="doencasgerais" required>
+                    <option value="nao">Não</option>
+                    <option value="sim">Sim</option>
+                </select>
 
-    <label>Você possui diabetes?</label>
-    <select class="caixa-select" name="diabetes" required>
-      <option value="nao">Não</option>
-      <option value="insulina">Sim, uso insulina</option>
-      <option value="controlada">Sim, controlada sem insulina</option>
-    </select>
+                <label>Você possui alguma doença cardíaca grave (ex: insuficiência cardíaca, arritmia grave, cardiopatia congênita não tratada)?</label>
+                <select class="caixa-select" name="problemacardiaco" required>
+                    <option value="nao">Não</option>
+                    <option value="sim">Sim</option>
+                </select>
 
-    <label>Você já teve câncer no sangue (ex: leucemia, linfoma)?</label>
-    <select class="caixa-select" name="cancersangue" required>
-      <option value="nao">Não</option>
-      <option value="sim">Sim</option>
-    </select>
+                <label>Você possui diabetes?</label>
+                <select class="caixa-select" name="diabetes" required>
+                    <option value="nao">Não</option>
+                    <option value="insulina">Sim, uso insulina</option>
+                    <option value="controlada">Sim, controlada sem insulina</option>
+                </select>
 
-    <label>Você possui doença renal crônica (insuficiência renal)?</label>
-    <select class="caixa-select" name="doencarenal" required>
-      <option value="nao">Não</option>
-      <option value="sim">Sim</option>
-    </select>
+                <label>Você já teve câncer no sangue (ex: leucemia, linfoma)?</label>
+                <select class="caixa-select" name="cancersangue" required>
+                    <option value="nao">Não</option>
+                    <option value="sim">Sim</option>
+                </select>
 
-    <label>Você possui problemas graves de coagulação do sangue (ex: hemofilia)?</label>
-    <select class="caixa-select" name="problemacoagulacao" required>
-      <option value="nao">Não</option>
-      <option value="sim">Sim</option>
-    </select>
+                <label>Você possui doença renal crônica (insuficiência renal)?</label>
+                <select class="caixa-select" name="doencarenal" required>
+                    <option value="nao">Não</option>
+                    <option value="sim">Sim</option>
+                </select>
 
-    <label>Você tem epilepsia?</label>
-    <select class="caixa-select" name="problemaepilepsia" required>
-      <option value="nao">Não</option>
-      <option value="recorrente">Sim, recorrente</option>
-      <option value="controlada">Sim, controlada</option>
-    </select>
+                <label>Você possui problemas graves de coagulação do sangue (ex: hemofilia)?</label>
+                <select class="caixa-select" name="problemacoagulacao" required>
+                    <option value="nao">Não</option>
+                    <option value="sim">Sim</option>
+                </select>
 
-    <label>Você possuí alguma doença autoimune que afeta algum órgão?</label>
-    <select class="caixa-select" name="doencaorgaos" required>
-      <option value="nao">Não</option>
-      <option value="sim">Sim</option>
-    </select>
+                <label>Você tem epilepsia?</label>
+                <select class="caixa-select" name="problemaepilepsia" required>
+                    <option value="nao">Não</option>
+                    <option value="recorrente">Sim, recorrente</option>
+                    <option value="controlada">Sim, controlada</option>
+                </select>
 
-  <div class="button-div" id="botao-enviar">
-    <button type="submit" class="custom-btn btn-2 btn-blue btn-quest">Enviar</button>
-  </div>
+                <label>Você possui alguma doença autoimune que afeta algum órgão?</label>
+                <select class="caixa-select" name="doencaorgaos" required>
+                    <option value="nao">Não</option>
+                    <option value="sim">Sim</option>
+                </select>
 
-     <div id="mensagem-container" class="mensagem-container" style="display: none;">
-       <p id="mensagem-texto" class="mensagem-texto"></p>
-       <div class="button-div">
-         <button id="mensagem-botao" class="custom-btn btn-2 btn-blue btn-quest">Entendi</button>
-       </div>
-     </div>
-   </form>
-  </div>
- </main>
- <script src="{{ url_for('static', filename='js/questionario.js') }}"></script>
+                <div class="button-div" id="botao-enviar">
+                    <button type="submit" class="custom-btn btn-2 btn-blue btn-quest">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/questionario.js') }}"></script>
 </body>
 </html>
