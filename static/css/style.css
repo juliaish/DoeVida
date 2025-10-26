@@ -79,6 +79,7 @@ main {
     transform: translateX(100%);
     transition: transform 0.3s ease-in;
     z-index: 1001;
+    display: none;
   }
 
   .nav-list li {
@@ -124,10 +125,27 @@ main {
     margin-bottom: 30px;
   }
 
+  .centralizada{
+    padding: 29px !important;
+  }
+
+  .centralizada-sobre{
+    padding: 29px !important;
+  }
+
+  .container-table{
+    font-size: 17px !important;
+  }
+
+  th{
+    padding: 20px 0 20px 0 !important;
+  }
+
 }
 
 .nav-list.active {
   transform: translateX(0);
+  display: flex;
 }
 
 @keyframes navLinkFade {
