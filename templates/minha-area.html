@@ -70,22 +70,13 @@
       <form id="formPerfil" method="POST" action="{{ url_for('minha_area')}}">
         <div class="dados-princ">
           <div class="dados">
-            <label for="nome">Nome:</label><br>
-            <input class="caixa-text" type="text" id="nome" name="nome" value="{{ usuario['nome']}}" readonly><br>
+            <label for="nome">Nome:</label>
+            <input class="caixa-text" type="text" id="nome" name="nome" value="{{ usuario['nome']}}" readonly>
 
-            <label for="sobrenome">Sobrenome:</label><br>
-            <input class="caixa-text" type="text" id="sobrenome" name="sobrenome" value="{{ usuario['sobrenome']}}" readonly><br>
-            
-            <label for="email">Email:</label><br>
-            <input class="caixa-text" type="email" id="email" name="email" value="{{ usuario['email']}}" readonly><br>
-            
-            <label for="senha">Senha:</label><br>
-            <input class="caixa-text" type="password" id="senha" name="senha" placeholder="••••••••" readonly>
-            <br>
-          </div>
+            <label for="sobrenome">Sobrenome:</label>
+            <input class="caixa-text" type="text" id="sobrenome" name="sobrenome" value="{{ usuario['sobrenome']}}" readonly>
 
-          <div class="dados">
-            <label for="tipo">Tipo Sanguíneo:</label><br>
+            <label for="tipo">Tipo Sanguíneo:</label>
             <select class="caixa-select" id="tipo" name="tipo" disabled>
               <option value="">Selecione...</option>
               <option value="A+" {% if usuario['tipo']=="A+" %}selected{% endif %}>A+</option>
@@ -98,14 +89,24 @@
               <option value="O-" {% if usuario['tipo']=="O-" %}selected{% endif %}>O-</option>
             </select>
             <!-- hidden para enviar valor -->
-            <input type="hidden" name="tipo" value="{{ usuario['tipo'] }}"><br>
+            <input type="hidden" name="tipo" value="{{ usuario['tipo'] }}">
+
+            
+            <input class="btn-alterar btn-orange custom-btn" type="submit" id="btnSalvar" value="Salvar" style="display: none; margin-bottom: 0;">
+          </div>
+
+          <div class="dados">
+            <label for="email">Email:</label>
+            <input class="caixa-text" type="email" id="email" name="email" value="{{ usuario['email']}}" readonly>
+            
+            <label for="senha">Senha:</label>
+            <input class="caixa-text" type="password" id="senha" name="senha" placeholder="••••••••" readonly>
         </div>
 
-        <input class="btn-alterar btn-orange custom-btn" type="submit" id="btnSalvar" value="Salvar" style="display: none;">
+        
       </form>
-
-      <input class="btn-alterar btn-blue custom-btn" type="button" id="btnEditar" value="Alterar dados">
     </div>
+    <input class="btn-alterar btn-blue custom-btn" type="button" id="btnEditar" value="Alterar dados">
   </div>
 </main>
 
