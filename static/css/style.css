@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+
 /*definiçoes globais*/
 * {
   margin: 0;
@@ -316,11 +318,11 @@ main {
   text-align: center;
   color:#a2272c;
   font-size: 30px;
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
 }
 
 .txt-index h1{
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 65px;
   padding-bottom: 10px;
   text-align: center;
@@ -357,11 +359,11 @@ main {
   text-align: left;
   color:#a2272c;
   font-size: 25px;
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
 }
 
 .txt-cuidados h1 {
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 65px;
   padding-bottom: 10px;
   text-align: center;
@@ -418,7 +420,7 @@ th {
   text-align: center;
   color:#a2272c;
   font-size: 30px;
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
 }
 
 /*centralizar questionario*/
@@ -432,7 +434,7 @@ th {
   color:#c94f52;
   text-align: left;
   font-size: 20px;
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
 }
 
 .form-questionario p{
@@ -447,7 +449,7 @@ th {
 
 /*estilizar select*/
 .caixa-select {
-  font-family: "Edu QLD Hand", cursive;             
+  font-family: "Bricolage Grotesque", sans-serif;             
   color: #a2272c;                      
   background-color: #ffffff;   
   font-size: 20px;     
@@ -465,7 +467,7 @@ th {
 
 /*estilizar questionario date*/
 .input-date {
-  font-family: "Edu QLD Hand", cursive;   
+  font-family: "Bricolage Grotesque", sans-serif;   
   font-size: 20px;                  
   color: #a2272c;                    
        
@@ -511,7 +513,7 @@ label {
 .txt-inicio {
   color:#a2272c;
   font-size: 40px;
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
   margin-bottom: 60px;
 }
 
@@ -520,7 +522,7 @@ label {
   height: auto;
   color:#a2272c;
   font-size: 20px;
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
   padding: 30px;
   margin-bottom: 30px;
   gap: 30px;
@@ -545,7 +547,7 @@ label {
 }
 
 .caixa-text {
-  font-family: "Edu QLD Hand", cursive;             
+  font-family: "Bricolage Grotesque", sans-serif;             
   color: #a2272c;                      
   background-color: #ffffff;   
   font-size: 20px;     
@@ -570,12 +572,12 @@ label {
 .lista-lugares {
   color:#a2272c;
   font-size: 25px;
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
   cursor: pointer;
 }
 
 .lista-lugares h1{
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 50px;
   padding-bottom: 10px;
  
@@ -592,7 +594,7 @@ label {
 .endereco-partida {
   font-size: 25px;
   color: #a2272c;
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
   display: flex;
   flex-direction: column; 
   gap: 5px;     
@@ -601,7 +603,7 @@ label {
 .endereco-partida-sub {
  font-size: 18px;
   color: #c94f52;
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
   
 }
 
@@ -651,7 +653,7 @@ label {
   position: absolute;
   color: #fff;
   font-size: 20px;
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
   background-color: #3e4a9d;
   margin-bottom: 290px;
   padding: 5px;
@@ -683,7 +685,7 @@ label {
   text-align: center;
   color: #a2272c;
   font-size: 25px;
-  font-family: "Edu QLD Hand", cursive;
+  font-family: "Bricolage Grotesque", sans-serif;
   margin-bottom: 20px;
 }
 .bem-vindo {
