@@ -167,6 +167,10 @@ main {
     width: 300px !important;
   }
 
+  .mensagem-container{
+    width: 300px !important;
+  }
+
 }
 
 .nav-list.active {
