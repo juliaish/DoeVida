@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import get_db_connection
-import google.generativeai as genai
+from google import genai
 from dotenv import load_dotenv
 from datetime import datetime
 from functools import wraps
@@ -15,7 +15,7 @@ from config import DevelopmentConfig, ProductionConfig, TestingConfig
 
 app = Flask(__name__)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-genai.configure(api_key=GEMINI_API_KEY)
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 env = os.environ.get("FLASK_ENV", "development")
 if env == "production":
@@ -240,8 +240,6 @@ def questionario():
     return render_template("questionario.html")
 
 def avaliar_aptidao_via_ia(dados):
-    modelo = genai.GenerativeModel("models/gemini-2.5-flash")
-
     prompt = f"""
     Você é um avaliador médico de triagem de doadores de sangue.
     Analise as informações do doador e responda apenas "APTO" ou "INAPTO"
@@ -262,7 +260,10 @@ def avaliar_aptidao_via_ia(dados):
     Retorne apenas uma palavra: APTO ou INAPTO.
     """
 
-    resposta = modelo.generate_content(prompt)
+    resposta = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt
+    )
     resultado = resposta.text.strip()
 
     print("\n===== RESPOSTA DO GEMINI =====")

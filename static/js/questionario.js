@@ -23,6 +23,11 @@ document.querySelector(".form-questionario").addEventListener("submit", function
         mensagemContainer.style.display = "block";
         mensagemTexto.textContent = resp.parecer;
 
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
         mensagemBotao.onclick = () => {
             if(resp.parecer.toUpperCase().includes("APTO")) {
                 form.submit();
