@@ -15,7 +15,7 @@ from config import DevelopmentConfig, ProductionConfig, TestingConfig
 
 app = Flask(__name__)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-client = genai.Client(api_key=GEMINI_API_KEY)
+client = genai.Client(api_key="AIzaSyCf1PUfY2-h9j6p7bjT26JpFnyS7xj_eA8")
 
 env = os.environ.get("FLASK_ENV", "development")
 if env == "production":
@@ -224,7 +224,7 @@ def questionario():
             tipo = respostas["tipo"]
 
             try:
-                database.inserir_usuario(nome, sobrenome, email, senha_hash)
+                database.inserir_usuario(nome, sobrenome, email, senha_hash,tipo)
                 usuario = database.buscar_usuario_por_email(email)
                 session["usuario_id"] = usuario["id"]
                 session["usuario_nome"] = usuario["nome"]
