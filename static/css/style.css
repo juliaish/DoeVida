@@ -227,7 +227,7 @@ main {
   background-color: #ebe6e6;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown-content.show {
   display: block;
 }
 
