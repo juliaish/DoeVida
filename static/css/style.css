@@ -95,7 +95,8 @@ main {
 
   .dropdown-content {
     background-color: #c94f52;
-    margin-left: -150px !important;
+    margin-left: -255px !important;
+    margin-top: -20px !important;
   }
   .centralizada {
     flex-direction: column;
@@ -172,7 +173,7 @@ main {
   }
 
   .questionario{
-    padding: 30px !important;
+    padding: 29px !important;
   }
 
 }
