@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from config import DevelopmentConfig, ProductionConfig, TestingConfig
 from database import get_db_connection
 import google.generativeai as genai
 from dotenv import load_dotenv
@@ -12,6 +11,8 @@ import re
 import os
 
 load_dotenv()
+from config import DevelopmentConfig, ProductionConfig, TestingConfig
+
 app = Flask(__name__)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
