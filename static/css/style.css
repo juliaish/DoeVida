@@ -171,6 +171,10 @@ main {
     width: 300px !important;
   }
 
+  .questionario{
+    padding: 30px !important;
+  }
+
 }
 
 .nav-list.active {
