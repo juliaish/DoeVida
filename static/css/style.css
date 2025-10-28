@@ -376,7 +376,7 @@ main {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: 65px;
   padding-bottom: 10px;
-  text-align: center;
+  text-align:left ;
 }
 
 .txt-cuidados li {
