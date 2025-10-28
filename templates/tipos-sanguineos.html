@@ -42,10 +42,15 @@
         <div class="line3"></div>
       </div>
       <ul class="nav-list">
-        <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+        {% if session.get('usuario_id') %}
+        <li>
+          <span class="bem-vindo">Olá, {{ session['usuario_nome'] }}!</span>
+        </li>
+        {% endif %}
         {% if session.get('usuario_id') %}
         <li><a href="{{ url_for('minha_area') }}">Minha Área</a></li>
         {% endif %}
+        <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
 
         <li>
           <div class="dropdown">
@@ -59,9 +64,6 @@
         </li>
 
       {% if session.get('usuario_id') %}
-      <li>
-        <span class="bem-vindo">Olá, {{ session['usuario_nome'] }}!</span>
-      </li>
       <li>
         <a class="custom-btn-login-cadastro btn-2 btn-red" href="{{ url_for('logout') }}">Logout</a>
       </li>

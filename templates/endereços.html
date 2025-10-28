@@ -14,19 +14,19 @@
   <!--leaflet-->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-     <!-- Início do Widget VLibras -->
-<div vw class="enabled">
-  <div vw-access-button class="active"></div>
-  <div vw-plugin-wrapper>
-    <div class="vw-plugin-top-wrapper"></div>
+  <!-- Início do Widget VLibras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
   </div>
-</div>
 
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-<script>
-  new window.VLibras.Widget('https://vlibras.gov.br/app');
-</script>
-<!-- Fim do Widget VLibras -->
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  <!-- Fim do Widget VLibras -->
 
 
   <!-- CSS -->
@@ -46,10 +46,13 @@
         <div class="line3"></div>
       </div>
       <ul class="nav-list">
-        <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+        <li>
+          <span class="bem-vindo">Olá, {{ session['usuario_nome'] }}!</span>
+        </li>
         {% if session.get('usuario_id') %}
         <li><a href="{{ url_for('minha_area') }}">Minha Área</a></li>
         {% endif %}
+        <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
 
         <li>
           <div class="dropdown">
@@ -62,9 +65,6 @@
           </div>
         </li>
         {% if session.get('usuario_id') %}
-        <li>
-          <span class="bem-vindo">Olá, {{ session['usuario_nome'] }}!</span>
-        </li>
         <li>
           <a class="custom-btn-login-cadastro btn-2 btn-red" href="{{ url_for('logout') }}">Logout</a>
         </li>
@@ -105,7 +105,7 @@
             Paulista</li>
         </ul>
 
-        <div id="info-lugar" ></div>
+        <div id="info-lugar"></div>
       </div>
 
 
