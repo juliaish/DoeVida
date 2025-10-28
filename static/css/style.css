@@ -122,6 +122,7 @@ main {
 
   .centralizada-sobre{
     height: auto !important;
+
   }
 
   .participante{
@@ -747,18 +748,4 @@ label {
   color: #721c24;
 }
 
-/* Move o botão e o painel do VLibras para a esquerda */
-[vw].enabled {
-  left: 0 !important;
-  right: auto !important;
-}
 
-[vw-access-button] {
-  left: 15px !important;
-  right: auto !important;
-}
-
-[vw-plugin-wrapper] {
-  left: 0 !important;
-  right: auto !important;
-}
