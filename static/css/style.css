@@ -675,6 +675,7 @@ label {
   width: auto;
   align-items: center;
   justify-content: center;
+  row-gap: 30px;
 }
 
 .centralizada-sobre{
@@ -744,4 +745,20 @@ label {
 .flash.error {
   background-color: #f8d7da;
   color: #721c24;
+}
+
+/* Move o botão e o painel do VLibras para a esquerda */
+[vw].enabled {
+  left: 0 !important;
+  right: auto !important;
+}
+
+[vw-access-button] {
+  left: 15px !important;
+  right: auto !important;
+}
+
+[vw-plugin-wrapper] {
+  left: 0 !important;
+  right: auto !important;
 }
