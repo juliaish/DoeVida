@@ -447,6 +447,13 @@ th {
   font-family: "Bricolage Grotesque", sans-serif;
 }
 
+.questionario h1{
+font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 35px;
+  padding-bottom: 8px;
+  text-align: left;
+  color:#a2272c;
+}
 .form-questionario p{
   margin-top: 30px;
   font-weight: bold;
@@ -714,7 +721,7 @@ label {
   border: 1px solid #ccc;
   background: #f9f9f9;
   margin-bottom: 20px;
-  height: 80px;
+  height: 110px;
   width: 700px;
 }
 .mensagem-texto {
