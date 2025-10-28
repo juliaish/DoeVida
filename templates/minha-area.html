@@ -13,18 +13,18 @@
   <!-- CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <!-- Início do Widget VLibras -->
-<div vw class="enabled">
-  <div vw-access-button class="active"></div>
-  <div vw-plugin-wrapper>
-    <div class="vw-plugin-top-wrapper"></div>
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
   </div>
-</div>
 
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-<script>
-  new window.VLibras.Widget('https://vlibras.gov.br/app');
-</script>
-<!-- Fim do Widget VLibras -->
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  <!-- Fim do Widget VLibras -->
 </head>
 
 <body>
@@ -51,67 +51,66 @@
             </div>
           </div>
         </li>
-       <li>
-         <span class="bem-vindo">Olá, {{ session['usuario_nome'] }}!</span>
-       </li>
-       <li>
-         <a class="custom-btn-login-cadastro btn-2 btn-red" href="{{ url_for('logout') }}">Logout</a>
-       </li>
+        <li>
+          <span class="bem-vindo">Olá, {{ session['usuario_nome'] }}!</span>
+        </li>
+        <li>
+          <a class="custom-btn-login-cadastro btn-2 btn-red" href="{{ url_for('logout') }}">Logout</a>
+        </li>
       </ul>
     </nav>
   </header>
 
-<main>
-  <div class="container-principal">
-    <h1 class="txt-inicio">Boas vindas, {{ usuario['nome']}}!</h1>
-    <div class="container-m-area borda-arrendondada">
-      <h1>Dados Cadastrais:</h1> <br>
+  <main>
+    <div class="container-principal">
+      <h1 class="txt-inicio">Boas vindas, {{ usuario['nome']}}!</h1>
+      <div class="container-m-area borda-arrendondada">
+        <h1>Dados Cadastrais:</h1> <br>
 
-      <form id="formPerfil" method="POST" action="{{ url_for('minha_area')}}">
-        <div class="dados-princ">
-          <div class="dados">
-            <label for="nome">Nome:</label>
-            <input class="caixa-text" type="text" id="nome" name="nome" value="{{ usuario['nome']}}" readonly>
+        <form id="formPerfil" method="POST" action="{{ url_for('minha_area')}}">
+          <div class="dados-princ">
+            <div class="dados">
+              <label for="nome">Nome:</label>
+              <input class="caixa-text" type="text" id="nome" name="nome" value="{{ usuario['nome']}}" readonly>
 
-            <label for="sobrenome">Sobrenome:</label>
-            <input class="caixa-text" type="text" id="sobrenome" name="sobrenome" value="{{ usuario['sobrenome']}}" readonly>
+              <label for="sobrenome">Sobrenome:</label>
+              <input class="caixa-text" type="text" id="sobrenome" name="sobrenome" value="{{ usuario['sobrenome']}}"
+                readonly>
 
-            <label for="tipo">Tipo Sanguíneo:</label>
-            <select class="caixa-select" id="tipo" name="tipo" disabled>
-              <option value="">Selecione...</option>
-              <option value="A+" {% if usuario['tipo']=="A+" %}selected{% endif %}>A+</option>
-              <option value="A-" {% if usuario['tipo']=="A-" %}selected{% endif %}>A-</option>
-              <option value="B+" {% if usuario['tipo']=="B+" %}selected{% endif %}>B+</option>
-              <option value="B-" {% if usuario['tipo']=="B-" %}selected{% endif %}>B-</option>
-              <option value="AB+" {% if usuario['tipo']=="AB+" %}selected{% endif %}>AB+</option>
-              <option value="AB-" {% if usuario['tipo']=="AB-" %}selected{% endif %}>AB-</option>
-              <option value="O+" {% if usuario['tipo']=="O+" %}selected{% endif %}>O+</option>
-              <option value="O-" {% if usuario['tipo']=="O-" %}selected{% endif %}>O-</option>
-            </select>
-            <!-- hidden para enviar valor -->
-            <input type="hidden" name="tipo" value="{{ usuario['tipo'] }}">
+              <label for="tipo">Tipo Sanguíneo:</label>
+              <select class="caixa-select" id="tipo" name="tipo" disabled>
+                <option value="">Selecione...</option>
+                <option value="A+" {% if usuario['tipo']=="A+" %}selected{% endif %}>A+</option>
+                <option value="A-" {% if usuario['tipo']=="A-" %}selected{% endif %}>A-</option>
+                <option value="B+" {% if usuario['tipo']=="B+" %}selected{% endif %}>B+</option>
+                <option value="B-" {% if usuario['tipo']=="B-" %}selected{% endif %}>B-</option>
+                <option value="AB+" {% if usuario['tipo']=="AB+" %}selected{% endif %}>AB+</option>
+                <option value="AB-" {% if usuario['tipo']=="AB-" %}selected{% endif %}>AB-</option>
+                <option value="O+" {% if usuario['tipo']=="O+" %}selected{% endif %}>O+</option>
+                <option value="O-" {% if usuario['tipo']=="O-" %}selected{% endif %}>O-</option>
+              </select>
+              <!-- hidden para enviar valor -->
+              <input type="hidden" name="tipo" value="{{ usuario['tipo'] }}">
+            </div>
 
-            
-            <input class="btn-alterar btn-orange custom-btn" type="submit" id="btnSalvar" value="Salvar" style="display: none; margin-bottom: 0;">
+            <div class="dados">
+              <label for="email">Email:</label>
+              <input class="caixa-text" type="email" id="email" name="email" value="{{ usuario['email']}}" readonly>
+
+              <label for="senha">Senha:</label>
+              <input class="caixa-text" type="password" id="senha" name="senha" placeholder="••••••••" readonly>
+            </div>
           </div>
-
-          <div class="dados">
-            <label for="email">Email:</label>
-            <input class="caixa-text" type="email" id="email" name="email" value="{{ usuario['email']}}" readonly>
-            
-            <label for="senha">Senha:</label>
-            <input class="caixa-text" type="password" id="senha" name="senha" placeholder="••••••••" readonly>
-        </div>
-
-        
-      </form>
-    </div>
-    <input class="btn-alterar btn-blue custom-btn" type="button" id="btnEditar" value="Alterar dados">
-  </div>
-</main>
+          <input class="btn-alterar btn-blue custom-btn" type="button" id="btnEditar" value="Alterar dados">
+          <input class="btn-alterar btn-orange custom-btn" type="submit" id="btnSalvar" value="Salvar"
+            style="display: none; margin-bottom: 0;">
+        </form>
+      </div>
+  </main>
 
 
-<script src="{{url_for('static', filename='js/script.js')}}"></script>
-<script src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
+  <script src="{{url_for('static', filename='js/script.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
 </body>
+
 </html>
