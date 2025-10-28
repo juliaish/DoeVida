@@ -445,6 +445,7 @@ th {
   text-align: left;
   font-size: 20px;
   font-family: "Bricolage Grotesque", sans-serif;
+  overflow: auto;
 }
 
 .questionario h1{
@@ -636,7 +637,7 @@ label {
   align-items: center;
 }
 
-/*estilizar msobre*/
+/*estilizar sobre*/
 
 .container-participantes{
   position:relative;

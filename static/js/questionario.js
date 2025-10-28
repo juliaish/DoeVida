@@ -23,21 +23,16 @@ document.querySelector(".form-questionario").addEventListener("submit", function
         mensagemContainer.style.display = "block";
         mensagemTexto.textContent = resp.parecer;
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+mensagemContainer.scrollIntoView({ behavior: "smooth", block: "center" });
 
-        mensagemBotao.onclick = () => {
-            if(resp.parecer.toUpperCase().includes("APTO")) {
-                form.submit();
-            } else {
-                window.location.href = "/";
-            }
-        };
-
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    })
+    mensagemBotao.onclick = () => {
+        if(resp.parecer.toUpperCase().includes("APTO")) {
+            form.submit();
+        } else {
+            window.location.href = "/";
+        }
+    };
+})
     .catch(err => {
         alert("Erro ao processar o questionário.");
         console.error(err);

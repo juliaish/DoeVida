@@ -63,13 +63,6 @@
     <div class="questionario">
         <h1>Para concluir o cadastro, responda o questionário e descubra se está apto a doar sangue:</h1><br>
 
-        <!-- mensagem aptidão/inaptidão -->
-        <div id="mensagem-container" class="mensagem-container" style="display: none;">
-            <p id="mensagem-texto" class="mensagem-texto"></p><br>
-            <div class="button-div">
-                <button id="mensagem-botao" class="custom-btn btn-2 btn-blue btn-quest">Entendi</button><br>
-            </div>
-        </div>
 
         <div id="questionario-container">
             <form class="form-questionario" action="{{ url_for('questionario') }}" method="POST">
@@ -153,6 +146,13 @@
                     <button type="submit" class="custom-btn btn-2 btn-blue btn-quest">Enviar</button>
                 </div>
             </form>
+            <!-- mensagem aptidão/inaptidão -->
+        <div id="mensagem-container" class="mensagem-container" style="display: none;">
+            <p id="mensagem-texto" class="mensagem-texto"></p><br>
+            <div class="button-div">
+                <button id="mensagem-botao" class="custom-btn btn-2 btn-blue btn-quest">Entendi</button><br>
+            </div>
+        </div>
         </div>
     </div>
 </main>
