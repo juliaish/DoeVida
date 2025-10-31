@@ -58,14 +58,12 @@
   <div class="login">
 
     <!-- bloco para exibir mensagens flash -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <ul>
-          {% for category, message in messages %}
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
+     <div class="toast-container" id="toast-container"></div>
+      <script id="flash-messages" type="application/json">
+          {{ get_flashed_messages(with_categories=true) | tojson }}
+      </script>
+
+
 
 
     <div class="container {%if add_class %} active {% endif %}" id="container">

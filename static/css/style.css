@@ -756,5 +756,34 @@ label {
   background-color: #f8d7da;
   color: #721c24;
 }
+/* Toast container */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  background-color: #f8d7da; 
+  color: #721c24;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  animation: slide-in 0.5s ease, fade-out 0.5s 3s forwards;
+}
+
+/* Animações */
+@keyframes slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fade-out {
+  to { opacity: 0; }
+}
 
 

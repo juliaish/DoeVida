@@ -121,7 +121,8 @@ def cadastro():
             not re.search(r"\d", senha) or
             not re.search(r"[^\w\s]", senha)):
             flash("A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um símbolo.", "error")
-            return redirect(url_for("cadastro"))
+            return render_template("login_cadastro.html", add_class=1)
+
         session["temp_nome"] = nome
         session["temp_sobrenome"] = sobrenome
         session["temp_email"] = email
